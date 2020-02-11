@@ -17,8 +17,8 @@ public class Invoice {
     private Long id;
 
     @Column
-    private String title;
+    private String seller_name;
 
     @Column
-    private String content;
+    private String status;
 }

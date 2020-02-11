@@ -3,6 +3,7 @@ package com.kodilla.invoice.controller;
 
 import com.kodilla.invoice.domain.Invoice;
 import com.kodilla.invoice.domain.InvoiceDto;
+import com.kodilla.invoice.facade.InvoiceFacade;
 import com.kodilla.invoice.mapper.InvoiceMapper;
 import com.kodilla.invoice.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,12 @@ public class InvoiceController {
     private DbService service;
     @Autowired
     private InvoiceMapper invoiceMapper;
+    @Autowired
+    private InvoiceFacade invoiceFacade;
 
     @RequestMapping(method = RequestMethod.GET, value = "/invoices")
     public List<InvoiceDto> getInvoices() {
-        return invoiceMapper.mapToInvoiceDtoList(service.getAllInvoices());
+        return invoiceFacade.fetchInvoices();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/invoices/{invoiceId}")

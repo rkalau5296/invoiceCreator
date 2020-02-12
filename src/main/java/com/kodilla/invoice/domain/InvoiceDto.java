@@ -16,7 +16,7 @@ public class InvoiceDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    //private String kind;
+
     @Column
     private String seller_name;
 

@@ -17,10 +17,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @CrossOrigin("*")
 public class InvoiceController {
     @Autowired
-    private InvoiceService service;
-    @Autowired
-    private InvoiceMapper invoiceMapper;
-    @Autowired
     private InvoiceFacade invoiceFacade;
 
     @RequestMapping(method = RequestMethod.GET, value = "/invoices")
@@ -35,16 +31,16 @@ public class InvoiceController {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/invoices/{invoiceId}")
     public void deleteInvoice (@PathVariable Long invoiceId){
-        service.deleteById(invoiceId);
+        invoiceFacade.deletedById(invoiceId);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/invoices")
     public InvoiceDto updateInvoice (@RequestBody InvoiceDto invoiceDto){
-        return invoiceMapper.mapToInvoiceDto(service.saveInvoice(invoiceMapper.mapToInvoice(invoiceDto)));
+        return invoiceFacade.updateInvoice(invoiceDto);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/invoices", consumes = APPLICATION_JSON_VALUE)
     public Invoice createInvoice (@RequestBody InvoiceDto invoiceDto) {
-        return service.saveInvoice(invoiceMapper.mapToInvoice(invoiceDto));
+        return invoiceFacade.createInvoice(invoiceDto);
     }
 }

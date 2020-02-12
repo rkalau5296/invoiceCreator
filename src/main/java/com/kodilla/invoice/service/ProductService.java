@@ -2,29 +2,30 @@ package com.kodilla.invoice.service;
 
 import com.kodilla.invoice.client.InvoiceClient;
 import com.kodilla.invoice.domain.Invoice;
-import com.kodilla.invoice.domain.InvoiceDto;
+import com.kodilla.invoice.domain.Product;
 import com.kodilla.invoice.repository.InvoiceRepository;
+import com.kodilla.invoice.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class InvoiceService {
+public class ProductService {
 
     @Autowired
-    private InvoiceRepository repository;
+    private ProductRepository repository;
 
-    public List<Invoice> getAllInvoices() {
+    public List<Product> getAllInvoices() {
         return repository.findAll();
     }
 
-    public Invoice getInvoiceById(Long id){
+    public Product getInvoiceById(Long id){
         return repository.findById(id).orElse(null);
     }
 
-    public Invoice saveInvoice(final Invoice invoice) {
-        return repository.save(invoice);
+    public Product saveProduct(final Product product) {
+        return repository.save(product);
     }
 
     public void deleteById(Long id) {

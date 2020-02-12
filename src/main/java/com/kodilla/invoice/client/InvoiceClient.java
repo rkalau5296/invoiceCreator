@@ -39,5 +39,18 @@ public class InvoiceClient {
         }
 
     }
+    public InvoiceDto getInvoicesById(Long id){
+
+        URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/invoices/" + id +".json?&" + invoiceConfig.getInvoiceToken())
+                .build().encode().toUri();
+        try{
+            InvoiceDto invoiceResponse = restTemplate.getForObject(uri, InvoiceDto.class);
+            return invoiceResponse;
+        }catch(RestClientException e){
+            LOGGER.error(e.getMessage(), e);
+            return  new InvoiceDto();
+        }
+
+    }
 
 }

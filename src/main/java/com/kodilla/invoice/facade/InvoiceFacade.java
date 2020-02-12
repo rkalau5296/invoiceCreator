@@ -14,8 +14,6 @@ import java.util.List;
 
 @Component
 public class InvoiceFacade {
-    @Autowired
-    private InvoiceService invoiceService;
 
     @Autowired
     private InvoiceMapper invoiceMapper;
@@ -24,16 +22,21 @@ public class InvoiceFacade {
     private InvoiceValidator invoiceValidator;
 
     @Autowired
-    private InvoiceDtoService service;
+    private InvoiceDtoService invoiceDtoService;
 
     public List<InvoiceDto> fetchInvoices() {
-        List<Invoice> invoices = invoiceMapper.mapToListInvoices(invoiceService.fetchInvoices());
+        List<Invoice> invoices = invoiceMapper.mapToListInvoices(invoiceDtoService.fetchInvoices());
         List<Invoice> filteredInvoices = invoiceValidator.validateInvoices(invoices);
         List<InvoiceDto> filteredInvoicesDto = invoiceMapper.mapToInvoiceDtoList(filteredInvoices);
         for (InvoiceDto invoiceDto: filteredInvoicesDto)
         {
-            service.saveInvoice(invoiceDto);
+            invoiceDtoService.saveInvoice(invoiceDto);
         }
         return filteredInvoicesDto;
+    }
+
+    public InvoiceDto fetchInvoicesById(Long id) {
+        InvoiceDto invoiceDto = invoiceDtoService.fetchInvoiceById(id);
+        return invoiceDtoService.saveInvoice(invoiceDto);
     }
 }

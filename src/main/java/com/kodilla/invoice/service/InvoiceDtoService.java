@@ -1,5 +1,6 @@
 package com.kodilla.invoice.service;
 
+import com.kodilla.invoice.client.InvoiceClient;
 import com.kodilla.invoice.domain.Invoice;
 import com.kodilla.invoice.domain.InvoiceDto;
 import com.kodilla.invoice.repository.InvoiceDtoRepository;
@@ -14,13 +15,21 @@ public class InvoiceDtoService {
 
     @Autowired
     private InvoiceDtoRepository repository;
+    @Autowired
+    InvoiceClient invoiceClient;
 
+    public List<InvoiceDto> fetchInvoices() {
+        return invoiceClient.getInvoices();
+    }
+    public InvoiceDto fetchInvoiceById(Long id) {
+        return invoiceClient.getInvoicesById(id);
+    }
     public List<InvoiceDto> getAllInvoices() {
         return repository.findAll();
     }
 
     public InvoiceDto getInvoiceById(Long id){
-        return repository.findById(id).orElse(null);
+        return invoiceClient.getInvoicesById(id);
     }
 
     public InvoiceDto saveInvoice(final InvoiceDto invoiceDto) {

@@ -20,4 +20,5 @@ public class InvoiceValidator {
         LOGGER.info("Invoices have been filtered. Current list size: " + filteredInvoices.size());
         return filteredInvoices;
     }
+
 }

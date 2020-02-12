@@ -30,7 +30,7 @@ public class InvoiceController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/invoices/{invoiceId}")
     public InvoiceDto getInvoice (@PathVariable Long invoiceId) {
-        return invoiceMapper.mapToInvoiceDto(service.getInvoiceById(invoiceId));
+        return invoiceFacade.fetchInvoicesById(invoiceId);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/invoices/{invoiceId}")

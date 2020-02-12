@@ -16,9 +16,6 @@ public class InvoiceService {
     @Autowired
     private InvoiceRepository repository;
 
-    public List<InvoiceDto> fetchInvoices() {
-        return invoiceClient.getInvoices();
-    }
     public List<Invoice> getAllInvoices() {
         return repository.findAll();
     }

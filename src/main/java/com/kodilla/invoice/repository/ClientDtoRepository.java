@@ -1,21 +1,20 @@
 package com.kodilla.invoice.repository;
 
-import com.kodilla.invoice.domain.Invoice;
-import com.kodilla.invoice.domain.Product;
+import com.kodilla.invoice.domain.ClientDto;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface ProductRepository extends CrudRepository<Product, Long> {
+public interface ClientDtoRepository extends CrudRepository<ClientDto, Long> {
     @Override
-    List<Product> findAll();
+    List<ClientDto> findAll();
 
     @Override
-    Optional<Product> findById(Long id);
+    Optional<ClientDto> findById(Long id);
 
     @Override
-    Product save (Product product);
+    ClientDto save (ClientDto clientDto);
 
 
     @Override

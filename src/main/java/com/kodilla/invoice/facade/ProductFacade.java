@@ -1,13 +1,11 @@
 package com.kodilla.invoice.facade;
 
-import com.kodilla.invoice.domain.Invoice;
-import com.kodilla.invoice.domain.InvoiceDto;
-import com.kodilla.invoice.domain.Product;
-import com.kodilla.invoice.domain.ProductDto;
-import com.kodilla.invoice.mapper.ProductMapper;
-import com.kodilla.invoice.service.ProductDtoService;
-import com.kodilla.invoice.service.ProductService;
-import com.kodilla.invoice.validator.ProductValidator;
+import com.kodilla.invoice.domain.Client;
+import com.kodilla.invoice.domain.ClientDto;
+import com.kodilla.invoice.mapper.ClientMapper;
+import com.kodilla.invoice.service.ClientDtoService;
+import com.kodilla.invoice.service.ClientService;
+import com.kodilla.invoice.validator.ClientValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,37 +15,37 @@ import java.util.List;
 public class ProductFacade {
 
     @Autowired
-    private ProductMapper productMapper;
+    private ClientMapper clientMapper;
     @Autowired
-    private ProductDtoService productDtoService;
+    private ClientDtoService clientDtoService;
     @Autowired
-    private ProductValidator productValidator;
+    private ClientValidator clientValidator;
     @Autowired
-    private ProductService productService;
+    private ClientService clientService;
 
-    public List<ProductDto> fetchProducts() {
-        List<Product> products = productMapper.mapToListProducts(productDtoService.fetchProducts());
-        List<Product> filteredInvoices = productValidator.validateProducts(products);
-        List<ProductDto> filteredProductsDto = productMapper.mapToListProductDto(filteredInvoices);
-        for (ProductDto productDto: filteredProductsDto)
+    public List<ClientDto> fetchClients() {
+        List<Client> clients = clientMapper.mapToListClients(clientDtoService.fetchProducts());
+        List<Client> filteredInvoices = clientValidator.validateProducts(clients);
+        List<ClientDto> filteredProductsDto = clientMapper.mapToListClientDto(filteredInvoices);
+        for (ClientDto clientDto : filteredProductsDto)
         {
-            productDtoService.saveProduct(productDto);
+            clientDtoService.saveProduct(clientDto);
         }
         return filteredProductsDto;
     }
 
-    public ProductDto fetchProductById (Long id) {
-        return productDtoService.saveProduct(productDtoService.fetchProductById(id));
+    public ClientDto fetchClientById (Long id) {
+        return clientDtoService.saveProduct(clientDtoService.fetchProductById(id));
     }
 
     public void deletedById(Long id) {
 
-        productDtoService.deleteById(id);
+        clientDtoService.deleteById(id);
     }
-    public ProductDto updateProduct(ProductDto productDto) {
-        return productDtoService.saveProduct(productDto);
+    public ClientDto updateClient(ClientDto clientDto) {
+        return clientDtoService.saveProduct(clientDto);
     }
-    public Product createProduct(ProductDto productDto) {
-        return productService.saveProduct(productMapper.mapToProduct(productDto));
+    public Client createClient(ClientDto clientDto) {
+        return clientService.saveProduct(clientMapper.mapToClient(clientDto));
     }
 }

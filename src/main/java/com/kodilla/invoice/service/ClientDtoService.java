@@ -2,28 +2,27 @@ package com.kodilla.invoice.service;
 
 import com.kodilla.invoice.client.InvoiceClient;
 import com.kodilla.invoice.domain.InvoiceDto;
-import com.kodilla.invoice.domain.ProductDto;
-import com.kodilla.invoice.repository.InvoiceDtoRepository;
-import com.kodilla.invoice.repository.ProductDtoRepository;
+import com.kodilla.invoice.domain.ClientDto;
+import com.kodilla.invoice.repository.ClientDtoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ProductDtoService {
+public class ClientDtoService {
     @Autowired
-    private ProductDtoRepository repository;
+    private ClientDtoRepository repository;
     @Autowired
     private InvoiceClient invoiceClient;
 
-    public List<ProductDto> fetchProducts() {
-        return invoiceClient.getProducts();
+    public List<ClientDto> fetchProducts() {
+        return invoiceClient.getClients();
     }
-    public ProductDto fetchProductById(Long id) {
-        return invoiceClient.getProductById(id);
+    public ClientDto fetchProductById(Long id) {
+        return invoiceClient.getClientById(id);
     }
-    public List<ProductDto> getAllInvoices() {
+    public List<ClientDto> getAllInvoices() {
         return repository.findAll();
     }
 
@@ -31,8 +30,8 @@ public class ProductDtoService {
         return invoiceClient.getInvoicesById(id);
     }
 
-    public ProductDto saveProduct(final ProductDto productDto) {
-        return repository.save(productDto);
+    public ClientDto saveProduct(final ClientDto clientDto) {
+        return repository.save(clientDto);
     }
 
     public void deleteById(Long id) {

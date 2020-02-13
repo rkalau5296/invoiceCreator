@@ -9,8 +9,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Entity(name = "products")
-public class Product {
+@Entity(name = "clients")
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

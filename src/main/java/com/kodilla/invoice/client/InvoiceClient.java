@@ -3,7 +3,7 @@ package com.kodilla.invoice.client;
 
 import com.kodilla.invoice.config.InvoiceConfig;
 import com.kodilla.invoice.domain.InvoiceDto;
-import com.kodilla.invoice.domain.ProductDto;
+import com.kodilla.invoice.domain.ClientDto;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -53,29 +53,29 @@ public class InvoiceClient {
         }
 
     }
-    public List<ProductDto> getProducts(){
+    public List<ClientDto> getClients(){
 
-        URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/invoices.json?" + invoiceConfig.getInvoiceToken())
+        URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/clients.json?" + invoiceConfig.getInvoiceToken())
                 .build().encode().toUri();
         try{
-            ProductDto[] productResponse = restTemplate.getForObject(uri, ProductDto[].class);
-            return Arrays.asList(Optional.ofNullable(productResponse).orElse(new ProductDto[0]));
+            ClientDto[] clientResponse = restTemplate.getForObject(uri, ClientDto[].class);
+            return Arrays.asList(Optional.ofNullable(clientResponse).orElse(new ClientDto[0]));
         }catch(RestClientException e){
             LOGGER.error(e.getMessage(), e);
             return  new ArrayList<>();
         }
 
     }
-    public ProductDto getProductById(Long id){
+    public ClientDto getClientById(Long id){
 
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/clients/" + id + ".json?" + invoiceConfig.getInvoiceToken())
                 .build().encode().toUri();
         try{
-            ProductDto productResponse = restTemplate.getForObject(uri, ProductDto.class);
-            return productResponse;
+            ClientDto clientResponse = restTemplate.getForObject(uri, ClientDto.class);
+            return clientResponse;
         }catch(RestClientException e){
             LOGGER.error(e.getMessage(), e);
-            return  new ProductDto();
+            return  new ClientDto();
         }
 
     }

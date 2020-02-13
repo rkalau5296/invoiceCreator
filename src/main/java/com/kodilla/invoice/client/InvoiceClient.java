@@ -4,6 +4,7 @@ package com.kodilla.invoice.client;
 import com.kodilla.invoice.config.InvoiceConfig;
 import com.kodilla.invoice.domain.InvoiceDto;
 import com.kodilla.invoice.domain.ClientDto;
+import com.kodilla.invoice.domain.ProductDto;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -76,6 +77,32 @@ public class InvoiceClient {
         }catch(RestClientException e){
             LOGGER.error(e.getMessage(), e);
             return  new ClientDto();
+        }
+
+    }
+    public List<ProductDto> getProducts(){
+
+        URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/products.json?" + invoiceConfig.getInvoiceToken())
+                .build().encode().toUri();
+        try{
+            ProductDto[] clientResponse = restTemplate.getForObject(uri, ProductDto[].class);
+            return Arrays.asList(Optional.ofNullable(clientResponse).orElse(new ProductDto[0]));
+        }catch(RestClientException e){
+            LOGGER.error(e.getMessage(), e);
+            return  new ArrayList<>();
+        }
+
+    }
+    public ProductDto getProductById(Long id){
+
+        URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/products/" + id + ".json?" + invoiceConfig.getInvoiceToken())
+                .build().encode().toUri();
+        try{
+            ProductDto productResponse = restTemplate.getForObject(uri, ProductDto.class);
+            return productResponse;
+        }catch(RestClientException e){
+            LOGGER.error(e.getMessage(), e);
+            return  new ProductDto();
         }
 
     }

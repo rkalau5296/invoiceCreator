@@ -21,7 +21,7 @@ public class ClientService {
         return repository.findById(id).orElse(null);
     }
 
-    public Client saveProduct(final Client client) {
+    public Client saveClient(final Client client) {
         return repository.save(client);
     }
 

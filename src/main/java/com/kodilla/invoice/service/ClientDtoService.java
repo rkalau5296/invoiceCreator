@@ -16,10 +16,10 @@ public class ClientDtoService {
     @Autowired
     private InvoiceClient invoiceClient;
 
-    public List<ClientDto> fetchProducts() {
+    public List<ClientDto> fetchClients() {
         return invoiceClient.getClients();
     }
-    public ClientDto fetchProductById(Long id) {
+    public ClientDto fetchClientById(Long id) {
         return invoiceClient.getClientById(id);
     }
     public List<ClientDto> getAllInvoices() {
@@ -30,7 +30,7 @@ public class ClientDtoService {
         return invoiceClient.getInvoicesById(id);
     }
 
-    public ClientDto saveProduct(final ClientDto clientDto) {
+    public ClientDto saveClient(final ClientDto clientDto) {
         return repository.save(clientDto);
     }
 

@@ -2,9 +2,8 @@ package com.kodilla.invoice.client;
 
 
 import com.kodilla.invoice.config.InvoiceConfig;
-import com.kodilla.invoice.domain.InvoiceDto;
-import com.kodilla.invoice.domain.ClientDto;
-import com.kodilla.invoice.domain.ProductDto;
+import com.kodilla.invoice.config.RateConfig;
+import com.kodilla.invoice.domain.*;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,7 +25,8 @@ public class InvoiceClient {
     private InvoiceConfig invoiceConfig;
     @Autowired
     private RestTemplate restTemplate;
-
+    @Autowired
+    private RateConfig rateConfig;
 
     public List<InvoiceDto> getInvoices(){
 
@@ -103,6 +103,19 @@ public class InvoiceClient {
         }catch(RestClientException e){
             LOGGER.error(e.getMessage(), e);
             return  new ProductDto();
+        }
+
+    }
+    public List<RateTableDto> getRates(){
+
+        URI uri = UriComponentsBuilder.fromHttpUrl("http://api.nbp.pl/api/exchangerates/tables/B")
+                .build().encode().toUri();
+        try{
+            RateTableDto[] clientResponse = restTemplate.getForObject(uri, RateTableDto[].class);
+            return Arrays.asList(Optional.ofNullable(clientResponse).orElse(new RateTableDto[0]));
+        }catch(RestClientException e){
+            LOGGER.error(e.getMessage(), e);
+            return  new ArrayList<>();
         }
 
     }

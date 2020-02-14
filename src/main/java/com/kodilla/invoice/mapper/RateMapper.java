@@ -37,4 +37,20 @@ public class RateMapper {
                 .map(rateTableDto -> new RateTableDto(rateTableDto.getTable(), rateTableDto.getNo(), rateTableDto.getEffectiveDate(), mapToListRatesDto(rateTableDto.getRates())))
                 .collect(toList());
     }
+    public RateTable mapToRateTable(final RateTableDto  rateTableDto) {
+        return new RateTable (
+                rateTableDto.getTable(),
+                rateTableDto.getNo(),
+                rateTableDto.getEffectiveDate(),
+                mapToListRates(rateTableDto.getRates()));
+
+    }
+    public RateTableDto mapToRateTableDto(final RateTable rateTable) {
+        return new RateTableDto(
+                rateTable.getTable(),
+                rateTable.getNo(),
+                rateTable.getEffectiveDate(),
+                mapToListRatesDto(rateTable.getRates()));
+
+    }
 }

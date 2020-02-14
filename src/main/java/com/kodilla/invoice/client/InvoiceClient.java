@@ -12,10 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.slf4j.Logger;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class InvoiceClient {
@@ -106,16 +103,42 @@ public class InvoiceClient {
         }
 
     }
-    public List<RateTableDto> getRates(){
+    public List<RateTableDto> getRates(String table){
 
-        URI uri = UriComponentsBuilder.fromHttpUrl("http://api.nbp.pl/api/exchangerates/tables/B")
+        URI uri = UriComponentsBuilder.fromHttpUrl(rateConfig.getRateEndPoint() + "exchangerates/tables/" + table)
                 .build().encode().toUri();
         try{
-            RateTableDto[] clientResponse = restTemplate.getForObject(uri, RateTableDto[].class);
-            return Arrays.asList(Optional.ofNullable(clientResponse).orElse(new RateTableDto[0]));
+            RateTableDto[] rateResponse = restTemplate.getForObject(uri, RateTableDto[].class);
+            return Arrays.asList(Optional.ofNullable(rateResponse).orElse(new RateTableDto[0]));
         }catch(RestClientException e){
             LOGGER.error(e.getMessage(), e);
             return  new ArrayList<>();
+        }
+
+    }
+    public List<RateTableDto> getRatesInDateRangeFromTo(String table, String startDate, String endDate){
+
+        URI uri = UriComponentsBuilder.fromHttpUrl(rateConfig.getRateEndPoint() + "exchangerates/tables/" + table + "/" + startDate + "/" + endDate)
+                .build().encode().toUri();
+        try{
+            RateTableDto[] rateResponse = restTemplate.getForObject(uri, RateTableDto[].class);
+            return Arrays.asList(Optional.ofNullable(rateResponse).orElse(new RateTableDto[0]));
+        }catch(RestClientException e){
+            LOGGER.error(e.getMessage(), e);
+            return  new ArrayList<>();
+        }
+
+    }
+    public RateTableDto getRateAPArticularCurrency(String table, String code){
+
+        URI uri = UriComponentsBuilder.fromHttpUrl(rateConfig.getRateEndPoint() + "exchangerates/rates/" + table + "/" + code)
+                .build().encode().toUri();
+        try{
+            RateTableDto rateResponse = restTemplate.getForObject(uri, RateTableDto.class);
+            return rateResponse;
+        }catch(RestClientException e){
+            LOGGER.error(e.getMessage(), e);
+            return new RateTableDto();
         }
 
     }

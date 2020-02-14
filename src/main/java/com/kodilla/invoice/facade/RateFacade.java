@@ -9,6 +9,7 @@ import com.kodilla.invoice.service.RateDtoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -20,8 +21,16 @@ public class RateFacade {
     private RateDtoService rateDtoService;
 
 
-    public List<RateTableDto> fetchRates() {
-        List<RateTable> rates = rateMapper.mapToRateTables(rateDtoService.fetchRates());
+    public List<RateTableDto> fetchRates(String table) {
+        List<RateTable> rates = rateMapper.mapToRateTables(rateDtoService.fetchRates(table));
         return rateMapper.mapToRateTablesDto(rates);
+    }
+    public List<RateTableDto> fetchRatesInDateRangeFromTo(String table, String startDate, String endDate) {
+        List<RateTable> rates = rateMapper.mapToRateTables(rateDtoService.fetchRatesInDateRangeFromTo(table, startDate, endDate));
+        return rateMapper.mapToRateTablesDto(rates);
+    }
+    public RateTableDto fetchRateAParticularCurrency(String table, String code) {
+        RateTable rate = rateMapper.mapToRateTable(rateDtoService.fetchRateAParticularcurrency(table, code));
+        return rateMapper.mapToRateTableDto(rate);
     }
 }

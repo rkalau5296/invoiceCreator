@@ -1,16 +1,12 @@
 package com.kodilla.invoice.controller;
 
-
-import com.kodilla.invoice.domain.Client;
 import com.kodilla.invoice.domain.Invoice;
 import com.kodilla.invoice.domain.InvoiceDto;
 import com.kodilla.invoice.facade.InvoiceFacade;
-import com.kodilla.invoice.mapper.InvoiceMapper;
-import com.kodilla.invoice.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController

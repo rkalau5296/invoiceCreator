@@ -1,6 +1,7 @@
 package com.kodilla.invoice.controller;
 
 
+import com.kodilla.invoice.domain.Client;
 import com.kodilla.invoice.domain.Invoice;
 import com.kodilla.invoice.domain.InvoiceDto;
 import com.kodilla.invoice.facade.InvoiceFacade;
@@ -35,12 +36,22 @@ public class InvoiceController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/invoices")
-    public InvoiceDto updateInvoice (@RequestBody InvoiceDto invoiceDto){
+    public InvoiceDto updateInvoice (@RequestBody InvoiceDto invoiceDto) {
         return invoiceFacade.updateInvoice(invoiceDto);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/invoices", consumes = APPLICATION_JSON_VALUE)
     public Invoice createInvoice (@RequestBody InvoiceDto invoiceDto) {
         return invoiceFacade.createInvoice(invoiceDto);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/invoicesDb")
+    public List<Invoice> getInvoicesFromDb() {
+        return invoiceFacade.getAllInvoicesFromDb();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/invoicesDb/{invoiceId}")
+    public Invoice getInvoiceByIdFromDb(@PathVariable Long invoiceId) {
+        return invoiceFacade.getInvoicesFromDbById(invoiceId);
     }
 }

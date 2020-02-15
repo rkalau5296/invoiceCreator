@@ -1,5 +1,6 @@
 package com.kodilla.invoice.facade;
 
+import com.kodilla.invoice.domain.Client;
 import com.kodilla.invoice.domain.Invoice;
 import com.kodilla.invoice.domain.InvoiceDto;
 import com.kodilla.invoice.mapper.InvoiceMapper;
@@ -39,16 +40,22 @@ public class InvoiceFacade {
     }
 
     public void deletedById(Long id) {
-
         invoiceDtoService.deleteById(id);
     }
 
     public InvoiceDto updateInvoice(InvoiceDto invoiceDto) {
         return invoiceDtoService.saveInvoice(invoiceDto);
     }
+
     public Invoice createInvoice(InvoiceDto invoiceDto) {
         return invoiceService.saveInvoice(invoiceMapper.mapToInvoice(invoiceDto));
     }
 
+    public List<Invoice> getAllInvoicesFromDb(){
+        return invoiceService.getAllInvoicesFromDb();
+    }
+    public Invoice getInvoicesFromDbById(Long id){
+        return invoiceService.getInvoiceByIdFromDb(id);
+    }
 
 }

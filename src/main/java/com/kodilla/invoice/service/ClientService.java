@@ -13,11 +13,11 @@ public class ClientService {
     @Autowired
     private ClientRepository repository;
 
-    public List<Client> getAllInvoices() {
+    public List<Client> getAllClientsFromDb() {
         return repository.findAll();
     }
 
-    public Client getInvoiceById(Long id){
+    public Client getClientsByIdFromDb(Long id){
         return repository.findById(id).orElse(null);
     }
 

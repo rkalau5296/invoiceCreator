@@ -1,7 +1,7 @@
 package com.kodilla.invoice.service;
 
 import com.kodilla.invoice.client.InvoiceClient;
-import com.kodilla.invoice.domain.InvoiceDto;
+
 import com.kodilla.invoice.domain.ClientDto;
 import com.kodilla.invoice.repository.ClientDtoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +22,7 @@ public class ClientDtoService {
     public ClientDto fetchClientById(Long id) {
         return invoiceClient.getClientById(id);
     }
-    public List<ClientDto> getAllInvoices() {
-        return repository.findAll();
-    }
 
-    public InvoiceDto getInvoiceById(Long id){
-        return invoiceClient.getInvoicesById(id);
-    }
 
     public ClientDto saveClient(final ClientDto clientDto) {
         return repository.save(clientDto);

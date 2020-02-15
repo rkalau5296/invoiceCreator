@@ -28,8 +28,8 @@ public class ClientController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/clients/{clientId}")
-    public void deleteClient (@PathVariable Long productId){
-        clientFacade.deletedById(productId);
+    public void deleteClient (@PathVariable Long clientId){
+        clientFacade.deletedById(clientId);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/clients")
@@ -40,5 +40,15 @@ public class ClientController {
     @RequestMapping(method = RequestMethod.POST, value = "/clients", consumes = APPLICATION_JSON_VALUE)
     public Client createClient (@RequestBody ClientDto clientDto) {
         return clientFacade.createClient(clientDto);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/clientsDb")
+    public List<Client> getClientsFromDb() {
+        return clientFacade.getAllClientsFromDb();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/clientsDb/{clientId}")
+    public Client getClientByIdFromDb(@PathVariable Long clientId) {
+        return clientFacade.getClientFromDbById(clientId);
     }
 }

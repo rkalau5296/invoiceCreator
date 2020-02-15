@@ -1,13 +1,10 @@
 package com.kodilla.invoice.service;
 
 import com.kodilla.invoice.client.InvoiceClient;
-import com.kodilla.invoice.domain.Invoice;
 import com.kodilla.invoice.domain.InvoiceDto;
 import com.kodilla.invoice.repository.InvoiceDtoRepository;
-import com.kodilla.invoice.repository.InvoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -21,14 +18,8 @@ public class InvoiceDtoService {
     public List<InvoiceDto> fetchInvoices() {
         return invoiceClient.getInvoices();
     }
-    public InvoiceDto fetchInvoiceById(Long id) {
-        return invoiceClient.getInvoicesById(id);
-    }
-    public List<InvoiceDto> getAllInvoices() {
-        return repository.findAll();
-    }
 
-    public InvoiceDto getInvoiceById(Long id){
+    public InvoiceDto fetchInvoiceById(Long id) {
         return invoiceClient.getInvoicesById(id);
     }
 

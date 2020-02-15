@@ -1,8 +1,6 @@
 package com.kodilla.invoice.service;
 
-import com.kodilla.invoice.client.InvoiceClient;
 import com.kodilla.invoice.domain.Invoice;
-import com.kodilla.invoice.domain.InvoiceDto;
 import com.kodilla.invoice.repository.InvoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +13,11 @@ public class InvoiceService {
     @Autowired
     private InvoiceRepository repository;
 
-    public List<Invoice> getAllInvoices() {
+    public List<Invoice> getAllInvoicesFromDb() {
         return repository.findAll();
     }
 
-    public Invoice getInvoiceById(Long id){
+    public Invoice getInvoiceByIdFromDb(Long id){
         return repository.findById(id).orElse(null);
     }
 

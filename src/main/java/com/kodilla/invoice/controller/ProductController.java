@@ -1,5 +1,6 @@
 package com.kodilla.invoice.controller;
 
+import com.kodilla.invoice.domain.Invoice;
 import com.kodilla.invoice.domain.Product;
 import com.kodilla.invoice.domain.ProductDto;
 import com.kodilla.invoice.facade.ProductFacade;
@@ -18,27 +19,37 @@ public class ProductController {
     private ProductFacade productFacade;
 
     @RequestMapping(method = RequestMethod.GET, value = "/products")
-    public List<ProductDto> getClients() {
+    public List<ProductDto> getProducts() {
         return productFacade.fetchProducts();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/products/{productId}")
-    public ProductDto getClient (@PathVariable Long productId) {
+    public ProductDto getProduct (@PathVariable Long productId) {
         return productFacade.fetchProductById(productId);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/products/{productId}")
-    public void deleteClient (@PathVariable Long productId){
+    public void deleteProduct (@PathVariable Long productId){
         productFacade.deletedById(productId);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/products")
-    public ProductDto updateClient (@RequestBody ProductDto productDto){
+    public ProductDto updateProduct (@RequestBody ProductDto productDto){
         return productFacade.updateProduct(productDto);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/products", consumes = APPLICATION_JSON_VALUE)
-    public Product createClient (@RequestBody ProductDto productDto) {
+    public Product createProduct (@RequestBody ProductDto productDto) {
         return productFacade.createProduct(productDto);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/productsDb")
+    public List<Product> getProductsFromDb() {
+        return productFacade.getAllProductsFromDb();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/productsDb/{productId}")
+    public Product getProductByIdFromDb(@PathVariable Long productId) {
+        return productFacade.getProductFromDbById(productId);
     }
 }

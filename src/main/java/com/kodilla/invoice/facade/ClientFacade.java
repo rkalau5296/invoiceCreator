@@ -48,4 +48,10 @@ public class ClientFacade {
     public Client createClient(ClientDto clientDto) {
         return clientService.saveClient(clientMapper.mapToClient(clientDto));
     }
+    public List<Client> getAllClientsFromDb(){
+        return clientService.getAllClientsFromDb();
+    }
+    public Client getClientFromDbById(Long id){
+        return clientService.getClientsByIdFromDb(id);
+    }
 }

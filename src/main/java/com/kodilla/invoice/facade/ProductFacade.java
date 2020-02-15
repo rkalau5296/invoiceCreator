@@ -8,7 +8,6 @@ import com.kodilla.invoice.service.ProductService;
 import com.kodilla.invoice.validator.ProductValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component
@@ -42,10 +41,20 @@ public class ProductFacade {
 
         productDtoService.deleteById(id);
     }
+
     public ProductDto updateProduct(ProductDto productDto) {
         return productDtoService.saveProductDto(productDto);
     }
+
     public Product createProduct(ProductDto productDto) {
         return productService.saveProduct(productMapper.mapToProduct(productDto));
+    }
+
+    public List<Product> getAllProductsFromDb(){
+        return productService.getAllInvoicesFromDb();
+    }
+
+    public Product getProductFromDbById(Long id){
+        return productService.getInvoiceByIdFromDb(id);
     }
 }

@@ -21,8 +21,8 @@ public class ClientService {
         return repository.findById(id).orElse(null);
     }
 
-    public Client saveClient(final Client client) {
-        return repository.save(client);
+    public Client saveClient(final Client clients) {
+        return repository.save(clients);
     }
 
     public void deleteById(Long id) {

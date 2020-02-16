@@ -10,6 +10,4 @@ import org.springframework.stereotype.Component;
 public class RateConfig {
     @Value("${api.nbp.pl/api}")
     private String rateEndPoint;
-
-
 }

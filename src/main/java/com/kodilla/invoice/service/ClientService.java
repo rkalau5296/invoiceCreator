@@ -28,7 +28,9 @@ public class ClientService {
     public CreateClient saveClient(final CreateClient clients) {
         return createClientRepository.save(clients);
     }
-
+    public Client save(final Client client) {
+        return repository.save(client);
+    }
     public void deleteById(Long id) {
         repository.deleteById(id);
     }

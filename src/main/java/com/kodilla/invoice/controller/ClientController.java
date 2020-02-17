@@ -34,7 +34,7 @@ public class ClientController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/clients")
-    public ClientDto updateClient (@RequestBody ClientDto clientDto){
+    public Client updateClient (@RequestBody ClientDto clientDto){
         return clientFacade.updateClient(clientDto);
     }
 

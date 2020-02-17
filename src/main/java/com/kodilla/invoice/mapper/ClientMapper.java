@@ -48,11 +48,28 @@ public class ClientMapper {
                         p.getStreet_no()))
                 .collect(toList());
     }
-    public CreateClient mapToClient (final CreateClientDto clientDto) {
+    public CreateClient mapToCreateClient (final CreateClientDto clientDto) {
         return new CreateClient(1L,"kq5eOa6IijlkjpvHV9P/konto-testowe-rk-kodilla", clientDto.getClient());
     }
     public ClientDto mapToClientDto (final Client p) {
         return new ClientDto(
+                p.getId(),
+                p.getName(),
+                p.getTax_no(),
+                p.getBank(),
+                p.getBank_account(),
+                p.getCity(),
+                p.getCountry(),
+                p.getEmail(),
+                p.getPerson(),
+                p.getPost_code(),
+                p.getPhone(),
+                p.getStreet(),
+                p.getStreet_no()
+        );
+    }
+    public Client mapToClient (final ClientDto p) {
+        return new Client(
                 p.getId(),
                 p.getName(),
                 p.getTax_no(),

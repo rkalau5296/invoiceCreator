@@ -44,11 +44,11 @@ public class ClientFacade {
 
         clientDtoService.deleteById(id);
     }
-    public ClientDto updateClient(ClientDto clientDto) {
-        return clientDtoService.saveClient(clientDto);
+    public Client updateClient(ClientDto clientDto) {
+        return clientService.save(clientMapper.mapToClient(clientDto));
     }
     public CreateClient createClient(CreateClientDto clientDto) {
-        return clientService.saveClient(clientMapper.mapToClient(clientDto));
+        return clientService.saveClient(clientMapper.mapToCreateClient(clientDto));
     }
     public List<Client> getAllClientsFromDb(){
         return clientService.getAllClientsFromDb();

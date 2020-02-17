@@ -25,6 +25,7 @@ public class ClientFacade {
     @Autowired
     private ClientService clientService;
 
+
     public List<ClientDto> fetchClients() {
         List<Client> clients = clientMapper.mapToListClients(clientDtoService.fetchClients());
         List<Client> filteredInvoices = clientValidator.validateProducts(clients);
@@ -42,7 +43,7 @@ public class ClientFacade {
 
     public void deletedById(Long id) {
 
-        clientDtoService.deleteById(id);
+        clientService.deleteById(id);
     }
     public Client updateClient(ClientDto clientDto) {
         return clientService.save(clientMapper.mapToClient(clientDto));

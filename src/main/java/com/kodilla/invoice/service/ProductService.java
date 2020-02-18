@@ -12,19 +12,18 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public Product saveProduct(final Product product) {
-        return productRepository.save(product);
-    }
-
-    public void deleteById(Long id) {
-        productRepository.deleteById(id);
-    }
-
-    public List<Product> getAllInvoicesFromDb() {
+    public List<Product> getAllProductsFromDb() {
         return productRepository.findAll();
     }
 
-    public Product getInvoiceByIdFromDb(Long id){
+    public Product getProductByIdFromDb(Long id){
         return productRepository.findById(id).orElse(null);
+    }
+
+    public Product save(final Product product) {
+        return productRepository.save(product);
+    }
+    public void deleteById(Long id) {
+        productRepository.deleteById(id);
     }
 }

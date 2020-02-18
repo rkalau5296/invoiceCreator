@@ -1,7 +1,6 @@
 package com.kodilla.invoice.mapper;
 
-import com.kodilla.invoice.domain.Product;
-import com.kodilla.invoice.domain.ProductDto;
+import com.kodilla.invoice.domain.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -29,4 +28,14 @@ public class ProductMapper {
                 productDto.getTax()
         );
     }
+    public Product mapToProductFromProductObjectDto (final ProductObjectDto productObjectDto) {
+        return new Product(
+                productObjectDto.getProduct().getId(),
+                productObjectDto.getProduct().getName(),
+                productObjectDto.getProduct().getCode(),
+                productObjectDto.getProduct().getPrice_net(),
+                productObjectDto.getProduct().getTax()
+        );
+    }
+
 }

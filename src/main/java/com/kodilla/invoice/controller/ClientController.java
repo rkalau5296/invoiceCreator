@@ -2,7 +2,6 @@ package com.kodilla.invoice.controller;
 
 import com.kodilla.invoice.domain.Client;
 import com.kodilla.invoice.domain.ClientDto;
-//import com.kodilla.invoice.domain.CreateClientDto;
 import com.kodilla.invoice.domain.CustomerDto;
 import com.kodilla.invoice.facade.ClientFacade;
 import org.springframework.beans.factory.annotation.Autowired;

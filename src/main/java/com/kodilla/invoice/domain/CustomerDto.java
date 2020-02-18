@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class CreateClientDto {
+public class CustomerDto {
 
     private Long id;
-    private String token;
+    private String api_token;
     private Client client;
 }

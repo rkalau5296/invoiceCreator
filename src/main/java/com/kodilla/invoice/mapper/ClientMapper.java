@@ -1,9 +1,8 @@
 package com.kodilla.invoice.mapper;
 
-import com.kodilla.invoice.domain.Client;
-import com.kodilla.invoice.domain.ClientDto;
-import com.kodilla.invoice.domain.CreateClient;
-import com.kodilla.invoice.domain.CreateClientDto;
+import com.kodilla.invoice.config.InvoiceConfig;
+import com.kodilla.invoice.domain.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,6 +11,9 @@ import static java.util.stream.Collectors.toList;
 
 @Component
 public class ClientMapper {
+
+    @Autowired
+    private InvoiceConfig invoiceConfig;
 
     public List<Client> mapToListClients(final List<ClientDto> clientDto) {
         return clientDto.stream()
@@ -48,8 +50,22 @@ public class ClientMapper {
                         p.getStreet_no()))
                 .collect(toList());
     }
-    public CreateClient mapToCreateClient (final CreateClientDto clientDto) {
-        return new CreateClient(1L,"kq5eOa6IijlkjpvHV9P/konto-testowe-rk-kodilla", clientDto.getClient());
+    public Client mapToClientFromCreateClientDto(final CreateClientDto clientDto) {
+        return new Client(
+                clientDto.getClient().getId(),
+                clientDto.getClient().getName(),
+                clientDto.getClient().getTax_no(),
+                clientDto.getClient().getBank(),
+                clientDto.getClient().getBank_account(),
+                clientDto.getClient().getCity(),
+                clientDto.getClient().getCountry(),
+                clientDto.getClient().getEmail(),
+                clientDto.getClient().getPerson(),
+                clientDto.getClient().getPost_code(),
+                clientDto.getClient().getPhone(),
+                clientDto.getClient().getStreet(),
+                clientDto.getClient().getTax_no()
+        );
     }
     public ClientDto mapToClientDto (final Client p) {
         return new ClientDto(
@@ -85,4 +101,5 @@ public class ClientMapper {
                 p.getStreet_no()
         );
     }
+
 }

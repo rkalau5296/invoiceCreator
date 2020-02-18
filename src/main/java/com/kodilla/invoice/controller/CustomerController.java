@@ -1,0 +1,34 @@
+package com.kodilla.invoice.controller;
+
+import com.kodilla.invoice.domain.ClientDto;
+import com.kodilla.invoice.domain.CustomerDto;
+import com.kodilla.invoice.facade.CustomerFacade;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/v1")
+@CrossOrigin("*")
+public class CustomerController {
+
+    @Autowired
+    private CustomerFacade customerFacade;
+
+    @RequestMapping(method = RequestMethod.GET, value = "/customers")
+    public List<ClientDto> getClients() {
+        return customerFacade.fetchClients();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/customers/{customerId}")
+    public ClientDto getClient (@PathVariable Long customerId) {
+        return customerFacade.fetchClientById(customerId);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/customers")
+    public CustomerDto createCustomer (@RequestBody CustomerDto customerDto) {
+        return customerFacade.createCustomer(customerDto);
+    }
+
+}

@@ -13,4 +13,6 @@ public class InvoiceConfig {
     @Value("${api_token}")
     private String invoiceToken;
 
+    @Value("${token}")
+    private String token;
 }

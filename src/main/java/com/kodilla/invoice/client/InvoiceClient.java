@@ -131,17 +131,7 @@ public class InvoiceClient {
             return new RateTableDto();
         }
     }
-    public CreateClientDto postClient(){
-        URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/clients.json")
-                .build().encode().toUri();
-        try{
-            CreateClientDto clientDtoResponse = restTemplate.getForObject(uri, CreateClientDto.class);
-            return clientDtoResponse;
-        }catch(RestClientException e){
-            LOGGER.error(e.getMessage(), e);
-            return  new CreateClientDto();
-        }
-    }
+
     public CustomerDto postCustomer(final CustomerDto customerDto){
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/clients.json")
 

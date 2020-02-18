@@ -50,7 +50,7 @@ public class ClientMapper {
                         p.getStreet_no()))
                 .collect(toList());
     }
-    public Client mapToClientFromCreateClientDto(final CreateClientDto clientDto) {
+    public Client mapToClientFromCustomerDto(final CustomerDto clientDto) {
         return new Client(
                 clientDto.getClient().getId(),
                 clientDto.getClient().getName(),

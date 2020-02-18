@@ -2,7 +2,8 @@ package com.kodilla.invoice.controller;
 
 import com.kodilla.invoice.domain.Client;
 import com.kodilla.invoice.domain.ClientDto;
-import com.kodilla.invoice.domain.CreateClientDto;
+//import com.kodilla.invoice.domain.CreateClientDto;
+import com.kodilla.invoice.domain.CustomerDto;
 import com.kodilla.invoice.facade.ClientFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class ClientController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/clients", consumes = APPLICATION_JSON_VALUE)
-    public Client createClient (@RequestBody CreateClientDto createClientDto) {
+    public Client createClient (@RequestBody CustomerDto createClientDto) {
         return clientFacade.createClient(createClientDto);
     }
 

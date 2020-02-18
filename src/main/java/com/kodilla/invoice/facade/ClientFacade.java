@@ -2,12 +2,9 @@ package com.kodilla.invoice.facade;
 
 import com.kodilla.invoice.domain.Client;
 import com.kodilla.invoice.domain.ClientDto;
-import com.kodilla.invoice.domain.CreateClientDto;
 import com.kodilla.invoice.domain.CustomerDto;
 import com.kodilla.invoice.mapper.ClientMapper;
-import com.kodilla.invoice.service.ClientDtoService;
 import com.kodilla.invoice.service.ClientService;
-import com.kodilla.invoice.validator.ClientValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,13 +16,7 @@ public class ClientFacade {
     @Autowired
     private ClientMapper clientMapper;
     @Autowired
-    private ClientDtoService clientDtoService;
-    @Autowired
-    private ClientValidator clientValidator;
-    @Autowired
     private ClientService clientService;
-
-
 
     public void deletedById(Long id) {
         clientService.deleteById(id);

@@ -12,9 +12,6 @@ import static java.util.stream.Collectors.toList;
 @Component
 public class ClientMapper {
 
-    @Autowired
-    private InvoiceConfig invoiceConfig;
-
     public List<Client> mapToListClients(final List<ClientDto> clientDto) {
         return clientDto.stream()
                 .map(p -> new Client( p.getId(),
@@ -67,23 +64,7 @@ public class ClientMapper {
                 clientDto.getClient().getTax_no()
         );
     }
-    public ClientDto mapToClientDto (final Client p) {
-        return new ClientDto(
-                p.getId(),
-                p.getName(),
-                p.getTax_no(),
-                p.getBank(),
-                p.getBank_account(),
-                p.getCity(),
-                p.getCountry(),
-                p.getEmail(),
-                p.getPerson(),
-                p.getPost_code(),
-                p.getPhone(),
-                p.getStreet(),
-                p.getStreet_no()
-        );
-    }
+
     public Client mapToClient (final ClientDto p) {
         return new Client(
                 p.getId(),

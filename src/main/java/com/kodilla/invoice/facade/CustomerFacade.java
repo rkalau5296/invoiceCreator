@@ -2,6 +2,7 @@ package com.kodilla.invoice.facade;
 
 import com.kodilla.invoice.domain.Client;
 import com.kodilla.invoice.domain.ClientDto;
+import com.kodilla.invoice.domain.CreatedCustomerDto;
 import com.kodilla.invoice.domain.CustomerDto;
 import com.kodilla.invoice.mapper.ClientMapper;
 import com.kodilla.invoice.service.ClientDtoService;
@@ -35,7 +36,7 @@ public class CustomerFacade {
         return clientDtoService.fetchClientById(id);
     }
 
-    public CustomerDto createCustomer(final CustomerDto customerDto) {
+    public CreatedCustomerDto createCustomer(final CustomerDto customerDto) {
         return customerService.createCustomer(customerDto);
     }
 

@@ -1,9 +1,6 @@
 package com.kodilla.invoice.controller;
 
-import com.kodilla.invoice.domain.ClientDto;
-import com.kodilla.invoice.domain.CustomerDto;
-import com.kodilla.invoice.domain.ProductDto;
-import com.kodilla.invoice.domain.ProductObjectDto;
+import com.kodilla.invoice.domain.*;
 import com.kodilla.invoice.facade.CustomerFacade;
 import com.kodilla.invoice.facade.ProductObjectFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +26,7 @@ public class ProductObjectController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/products")
-    public ProductObjectDto createProduct (@RequestBody ProductObjectDto productObjectDto) {
+    public CreatedProductDto createProduct (@RequestBody ProductObjectDto productObjectDto) {
         return productObjectFacade.createProduct(productObjectDto);
     }
 }

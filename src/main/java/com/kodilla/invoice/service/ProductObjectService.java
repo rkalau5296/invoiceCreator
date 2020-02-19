@@ -1,6 +1,7 @@
 package com.kodilla.invoice.service;
 
 import com.kodilla.invoice.client.InvoiceClient;
+import com.kodilla.invoice.domain.CreatedProductDto;
 import com.kodilla.invoice.domain.CustomerDto;
 import com.kodilla.invoice.domain.ProductObjectDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,8 @@ public class ProductObjectService {
     private InvoiceClient invoiceClient;
 
 
-    public ProductObjectDto createProduct(final ProductObjectDto productObjectDto) {
-        ProductObjectDto newProduct = invoiceClient.postProduct(productObjectDto);
+    public CreatedProductDto createProduct(final ProductObjectDto productObjectDto) {
+        CreatedProductDto newProduct = invoiceClient.postProduct(productObjectDto);
         //        ofNullable(newCustomer).ifPresent(customer->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,
 ////                "New customer: "+ card.getName() + " has been created on your Trello account")));
 

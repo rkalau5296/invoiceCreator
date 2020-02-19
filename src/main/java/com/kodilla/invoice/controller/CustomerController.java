@@ -1,6 +1,7 @@
 package com.kodilla.invoice.controller;
 
 import com.kodilla.invoice.domain.ClientDto;
+import com.kodilla.invoice.domain.CreatedCustomerDto;
 import com.kodilla.invoice.domain.CustomerDto;
 import com.kodilla.invoice.facade.CustomerFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class CustomerController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/customers")
-    public CustomerDto createCustomer (@RequestBody CustomerDto customerDto) {
+    public CreatedCustomerDto createCustomer (@RequestBody CustomerDto customerDto) {
         return customerFacade.createCustomer(customerDto);
     }
 

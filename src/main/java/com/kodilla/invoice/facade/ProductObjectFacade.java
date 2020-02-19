@@ -34,7 +34,7 @@ public class ProductObjectFacade {
         return productDtoService.fetchProductById(id);
     }
 
-    public ProductObjectDto createProduct(final ProductObjectDto productObjectDto) {
+    public CreatedProductDto createProduct(final ProductObjectDto productObjectDto) {
         return productObjectService.createProduct(productObjectDto);
     }
 

@@ -132,30 +132,29 @@ public class InvoiceClient {
         }
     }
 
-    public CustomerDto postCustomer(final CustomerDto customerDto){
+    public CreatedCustomerDto postCustomer(final CustomerDto customerDto){
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/clients.json")
 
                 .build().encode().toUri();
         try{
-            CustomerDto clientDtoResponse = restTemplate.postForObject(uri, customerDto, CustomerDto.class);
+            CreatedCustomerDto clientDtoResponse = restTemplate.postForObject(uri, customerDto, CreatedCustomerDto.class);
             return clientDtoResponse;
         }catch(RestClientException e){
             LOGGER.error(e.getMessage(), e);
-            return  new CustomerDto();
+            return  new CreatedCustomerDto();
         }
     }
-    public ProductObjectDto postProduct(final ProductObjectDto productObjectDto){
+    public CreatedProductDto postProduct(final ProductObjectDto productObjectDto){
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/products.json")
 
                 .build().encode().toUri();
         try{
-            ProductObjectDto clientDtoResponse = restTemplate.postForObject(uri, productObjectDto, ProductObjectDto.class);
+            CreatedProductDto clientDtoResponse = restTemplate.postForObject(uri, productObjectDto, CreatedProductDto.class);
             return clientDtoResponse;
         }catch(RestClientException e){
             LOGGER.error(e.getMessage(), e);
-            return  new ProductObjectDto();
+            return  new CreatedProductDto();
         }
     }
-
 
 }

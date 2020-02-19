@@ -25,20 +25,6 @@ public class InvoiceFacade {
     @Autowired
     private InvoiceService invoiceService;
 
-    public List<InvoiceDto> fetchInvoices() {
-        List<Invoice> invoices = invoiceMapper.mapToListInvoices(invoiceDtoService.fetchInvoices());
-        List<Invoice> filteredInvoices = invoiceValidator.validateInvoices(invoices);
-        List<InvoiceDto> filteredInvoicesDto = invoiceMapper.mapToInvoiceDtoList(filteredInvoices);
-        for (InvoiceDto invoiceDto: filteredInvoicesDto)
-        {
-            invoiceDtoService.saveInvoice(invoiceDto);
-        }
-        return invoiceDtoService.fetchInvoices();
-    }
-
-    public InvoiceDto fetchInvoicesById(Long id) {
-        return invoiceDtoService.fetchInvoiceById(id);
-    }
 
     public void deletedById(Long id) {
         invoiceDtoService.deleteById(id);

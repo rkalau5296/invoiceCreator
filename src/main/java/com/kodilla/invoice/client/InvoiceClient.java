@@ -24,27 +24,27 @@ public class InvoiceClient {
     @Autowired
     private RateConfig rateConfig;
 
-    public List<InvoiceDto> getInvoices(){
+    public List<CreatedInvoiceDto> getInvoices(){
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/invoices.json?&" + invoiceConfig.getInvoiceToken())
                 .build().encode().toUri();
         try{
-            InvoiceDto[] invoiceResponse = restTemplate.getForObject(uri, InvoiceDto[].class);
-            return Arrays.asList(Optional.ofNullable(invoiceResponse).orElse(new InvoiceDto[0]));
+            CreatedInvoiceDto[] invoiceResponse = restTemplate.getForObject(uri, CreatedInvoiceDto[].class);
+            return Arrays.asList(Optional.ofNullable(invoiceResponse).orElse(new CreatedInvoiceDto[0]));
         }catch(RestClientException e){
             LOGGER.error(e.getMessage(), e);
             return  new ArrayList<>();
         }
     }
 
-    public InvoiceDto getInvoicesById(Long id){
+    public CreatedInvoiceDto getInvoicesById(Long id){
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/invoices/" + id +".json?&" + invoiceConfig.getInvoiceToken())
                 .build().encode().toUri();
         try{
-            InvoiceDto invoiceResponse = restTemplate.getForObject(uri, InvoiceDto.class);
+            CreatedInvoiceDto invoiceResponse = restTemplate.getForObject(uri, CreatedInvoiceDto.class);
             return invoiceResponse;
         }catch(RestClientException e){
             LOGGER.error(e.getMessage(), e);
-            return  new InvoiceDto();
+            return  new CreatedInvoiceDto();
         }
     }
 
@@ -154,6 +154,18 @@ public class InvoiceClient {
         }catch(RestClientException e){
             LOGGER.error(e.getMessage(), e);
             return  new CreatedProductDto();
+        }
+    }
+    public CreatedInvoiceDto postInvoice(final InvoiceObjectDto invoiceObjectDto){
+        URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/invoices.json")
+
+                .build().encode().toUri();
+        try{
+            CreatedInvoiceDto invoiceDtoResponse = restTemplate.postForObject(uri, invoiceObjectDto, CreatedInvoiceDto.class);
+            return invoiceDtoResponse;
+        }catch(RestClientException e){
+            LOGGER.error(e.getMessage(), e);
+            return  new CreatedInvoiceDto();
         }
     }
 

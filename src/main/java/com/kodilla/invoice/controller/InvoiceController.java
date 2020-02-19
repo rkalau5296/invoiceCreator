@@ -41,7 +41,7 @@ public class InvoiceController {
         return invoiceFacade.createInvoice(invoiceObjectDto);
     }
     @RequestMapping(method = RequestMethod.PUT, value = "/invoices")
-    public InvoiceDto updateInvoice (@RequestBody InvoiceDto invoiceDto) {
+    public Invoice updateInvoice (@RequestBody InvoiceDto invoiceDto) {
         return invoiceFacade.updateInvoice(invoiceDto);
     }
 

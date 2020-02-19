@@ -44,8 +44,8 @@ public class InvoiceFacade {
         invoiceDtoService.deleteById(id);
     }
 
-    public InvoiceDto updateInvoice(InvoiceDto invoiceDto) {
-        return invoiceDtoService.saveInvoice(invoiceDto);
+    public Invoice updateInvoice(InvoiceDto invoiceDto) {
+        return invoiceService.saveInvoice(invoiceMapper.mapToInvoice(invoiceDto));
     }
 
     public Invoice createInvoice(InvoiceObjectDto invoiceObjectDto) {

@@ -4,12 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-public class InvoiceObjectDto {
+public class RateCurrency {
 
-    private Long id;
-    private String api_token;
-    private Invoice invoice;
+    String table;
+    String currency;
+    String code;
+    List<RatesCurrency> rates;
 }

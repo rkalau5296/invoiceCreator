@@ -1,5 +1,6 @@
 package com.kodilla.invoice.facade;
 
+import com.kodilla.invoice.domain.RateCurrencyDto;
 import com.kodilla.invoice.domain.RateTable;
 import com.kodilla.invoice.domain.RateTableDto;
 import com.kodilla.invoice.mapper.RateMapper;
@@ -24,8 +25,8 @@ public class RateFacade {
         List<RateTable> rates = rateMapper.mapToRateTables(rateDtoService.fetchRatesInDateRangeFromTo(table, startDate, endDate));
         return rateMapper.mapToRateTablesDto(rates);
     }
-    public RateTableDto fetchRateAParticularCurrency(String table, String code) {
-        RateTable rate = rateMapper.mapToRateTable(rateDtoService.fetchRateAParticularcurrency(table, code));
-        return rateMapper.mapToRateTableDto(rate);
+    public RateCurrencyDto fetchRateAParticularCurrency(String table, String code) {
+        //RateTable rate = rateMapper.mapToRateTable(rateDtoService.fetchRateAParticularcurrency(table, code));
+        return rateDtoService.fetchRateAParticularcurrency(table, code);
     }
 }

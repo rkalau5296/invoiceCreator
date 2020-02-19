@@ -1,6 +1,7 @@
 package com.kodilla.invoice.service;
 
 import com.kodilla.invoice.client.InvoiceClient;
+import com.kodilla.invoice.domain.RateCurrencyDto;
 import com.kodilla.invoice.domain.RateTableDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class RateDtoService {
         return invoiceClient.getRatesInDateRangeFromTo(table, startDate, endDate);
     }
 
-    public RateTableDto fetchRateAParticularcurrency(String table, String code) {
+    public RateCurrencyDto fetchRateAParticularcurrency(String table, String code) {
         return invoiceClient.getRateAPArticularCurrency(table, code);
     }
 }

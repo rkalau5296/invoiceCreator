@@ -120,15 +120,15 @@ public class InvoiceClient {
         }
     }
 
-    public RateTableDto getRateAPArticularCurrency(String table, String code){
+    public RateCurrencyDto getRateAPArticularCurrency(String table, String code){
         URI uri = UriComponentsBuilder.fromHttpUrl(rateConfig.getRateEndPoint() + "exchangerates/rates/" + table + "/" + code)
                 .build().encode().toUri();
         try{
-            RateTableDto rateResponse = restTemplate.getForObject(uri, RateTableDto.class);
+            RateCurrencyDto rateResponse = restTemplate.getForObject(uri, RateCurrencyDto.class);
             return rateResponse;
         }catch(RestClientException e){
             LOGGER.error(e.getMessage(), e);
-            return new RateTableDto();
+            return new RateCurrencyDto();
         }
     }
 

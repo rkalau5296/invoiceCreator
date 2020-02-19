@@ -1,5 +1,6 @@
 package com.kodilla.invoice.controller;
 
+import com.kodilla.invoice.domain.RateCurrencyDto;
 import com.kodilla.invoice.domain.RateTableDto;
 import com.kodilla.invoice.facade.RateFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class RateController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/rates/{table}/{code}")
-    public RateTableDto getRateAParticularCurrency(@PathVariable String table, @PathVariable String code) {
+    public RateCurrencyDto getRateAParticularCurrency(@PathVariable String table, @PathVariable String code) {
         return rateFacade.fetchRateAParticularCurrency(table, code);
     }
 }

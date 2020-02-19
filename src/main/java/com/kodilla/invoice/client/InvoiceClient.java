@@ -144,6 +144,18 @@ public class InvoiceClient {
             return  new CustomerDto();
         }
     }
+    public ProductObjectDto postProduct(final ProductObjectDto productObjectDto){
+        URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/products.json")
+
+                .build().encode().toUri();
+        try{
+            ProductObjectDto clientDtoResponse = restTemplate.postForObject(uri, productObjectDto, ProductObjectDto.class);
+            return clientDtoResponse;
+        }catch(RestClientException e){
+            LOGGER.error(e.getMessage(), e);
+            return  new ProductObjectDto();
+        }
+    }
 
 
 }

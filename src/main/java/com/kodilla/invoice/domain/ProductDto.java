@@ -21,6 +21,6 @@ public class ProductDto {
     @Column
     private double price_net;
     @Column
-    private double tax;
+    private String tax;
 
 }

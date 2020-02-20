@@ -124,7 +124,7 @@ public class ClientControllerTest {
                 .andExpect(jsonPath("$.post_code", is("post_code")))
                 .andExpect(jsonPath("$.phone", is("phone")))
                 .andExpect(jsonPath("$.street", is("street")))
-                .andExpect(jsonPath("$.street_no", is("street_no")));;
+                .andExpect(jsonPath("$.street_no", is("street_no")));
     }
     @Test
     public void shouldUpdateClient() throws Exception {

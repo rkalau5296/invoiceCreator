@@ -17,16 +17,6 @@ public class InvoiceController {
     @Autowired
     private InvoiceFacade invoiceFacade;
 
-
-//    @RequestMapping(method = RequestMethod.GET, value = "/invoices")
-//    public List<InvoiceDto> getInvoices() {
-//        return invoiceFacade.fetchInvoices();
-//    }
-//
-//    @RequestMapping(method = RequestMethod.GET, value = "/invoices/{invoiceId}")
-//    public InvoiceDto getInvoice (@PathVariable Long invoiceId) {
-//        return invoiceFacade.fetchInvoicesById(invoiceId);
-//    }
     @RequestMapping(method = RequestMethod.GET, value = "/invoices")
     public List<Invoice> getInvoicesFromDb() {
         return invoiceFacade.getAllInvoicesFromDb();

@@ -3,9 +3,9 @@ package com.kodilla.invoice.controller;
 import com.google.gson.Gson;
 import com.kodilla.invoice.domain.Client;
 import com.kodilla.invoice.domain.ClientDto;
+import com.kodilla.invoice.domain.CreatedCustomerDto;
 import com.kodilla.invoice.domain.CustomerDto;
-import com.kodilla.invoice.facade.ClientFacade;
-import com.kodilla.invoice.service.ClientService;
+import com.kodilla.invoice.facade.CustomerFacade;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
@@ -21,42 +21,32 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(ClientController.class)
-public class ClientControllerTest {
+@WebMvcTest(CustomerController.class)
+public class CustomerControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private ClientFacade clientFacade;
+    private CustomerFacade customerFacade;
 
     @Test
-    public void shouldFetchEmptyClientList() throws Exception {
+    public void shouldGetClients() throws Exception {
 
         //Given
-        List<Client> clientList = new ArrayList<>();
-        when(clientFacade.getAllClientsFromDb()).thenReturn(clientList);
+        ClientDto clientDto = new ClientDto(1L, "name", "tax_no", "bank", "bank_account", "city", "country", "email", "person", "post_code", "phone", "street", "street_no");
+        List<ClientDto> clientDtoList = new ArrayList<>();
+        clientDtoList.add(clientDto);
+        when(customerFacade.fetchClients()).thenReturn(clientDtoList);
 
         //When & Then
-        mockMvc.perform(get("/v1/clients").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is(200))
-                .andExpect(jsonPath("$", hasSize(0)));
-    }
-    @Test
-    public void shouldFetchClientList() throws Exception {
-
-        //Given
-        List<Client> clientList = new ArrayList<>();
-        clientList.add(new Client(1L, "name", "tax_no", "bank", "bank_account", "city", "country", "email", "person", "post_code", "phone", "street", "street_no"));
-        when(clientFacade.getAllClientsFromDb()).thenReturn(clientList);
-
-        //When & Then
-        mockMvc.perform(get("/v1/clients").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/customers").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200))
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -74,14 +64,14 @@ public class ClientControllerTest {
                 .andExpect(jsonPath("$[0].street_no", is("street_no")));
     }
     @Test
-    public void shouldGetClientByIdFromDb() throws Exception{
+    public void shouldGetCustomerByIdFromDb() throws Exception{
 
         //Given
-        Client client = new Client(1L, "name", "tax_no", "bank", "bank_account", "city", "country", "email", "person", "post_code", "phone", "street", "street_no");
-        when(clientFacade.getClientFromDbById(ArgumentMatchers.any(Long.class))).thenReturn(client);
+        ClientDto clientDto = new ClientDto(1L, "name", "tax_no", "bank", "bank_account", "city", "country", "email", "person", "post_code", "phone", "street", "street_no");
+        when(customerFacade.fetchClientById(ArgumentMatchers.any(Long.class))).thenReturn(clientDto);
 
         // When&Then
-        mockMvc.perform(get("/v1/clients/1")
+        mockMvc.perform(get("/v1/customers/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200))
                 .andExpect(jsonPath("$.id", is(1)))
@@ -99,16 +89,16 @@ public class ClientControllerTest {
                 .andExpect(jsonPath("$.street_no", is("street_no")));;
     }
     @Test
-    public void shouldCreateClient() throws Exception {
+    public void shouldCreateCustomer() throws Exception {
 
         //Given
-        Client client = new Client(1L, "name", "tax_no", "bank", "bank_account", "city", "country", "email", "person", "post_code", "phone", "street", "street_no");
-        when(clientFacade.createClient(ArgumentMatchers.any(CustomerDto.class))).thenReturn(client);
+        CreatedCustomerDto createdCustomerDto = new CreatedCustomerDto(1L, "name", "tax_no", "bank", "bank_account", "city", "country", "email", "person", "post_code", "phone", "street", "street_no");
+        when(customerFacade.createCustomer(ArgumentMatchers.any(CustomerDto.class))).thenReturn(createdCustomerDto);
         Gson gson = new Gson();
-        String jsonContent = gson.toJson(client);
+        String jsonContent = gson.toJson(createdCustomerDto);
 
         // When&Then
-        mockMvc.perform(post("/v1/clients")
+        mockMvc.perform(post("/v1/customers")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
@@ -126,42 +116,5 @@ public class ClientControllerTest {
                 .andExpect(jsonPath("$.street", is("street")))
                 .andExpect(jsonPath("$.street_no", is("street_no")));;
     }
-    @Test
-    public void shouldUpdateClient() throws Exception {
 
-        //Given
-        Client client = new Client(1L, "name", "tax_no", "bank", "bank_account", "city", "country", "email", "person", "post_code", "phone", "street", "street_no");
-        when(clientFacade.updateClient(ArgumentMatchers.any(ClientDto.class))).thenReturn(client);
-        Gson gson = new Gson();
-        String jsonContent = gson.toJson(client);
-
-        // When&Then
-        mockMvc.perform(put("/v1/clients")
-                .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding("UTF-8")
-                .content(jsonContent))
-                .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.name", is("name")))
-                .andExpect(jsonPath("$.tax_no", is("tax_no")))
-                .andExpect(jsonPath("$.bank", is("bank")))
-                .andExpect(jsonPath("$.bank_account", is("bank_account")))
-                .andExpect(jsonPath("$.city", is("city")))
-                .andExpect(jsonPath("$.country", is("country")))
-                .andExpect(jsonPath("$.email", is("email")))
-                .andExpect(jsonPath("$.person", is("person")))
-                .andExpect(jsonPath("$.post_code", is("post_code")))
-                .andExpect(jsonPath("$.phone", is("phone")))
-                .andExpect(jsonPath("$.street", is("street")))
-                .andExpect(jsonPath("$.street_no", is("street_no")));;
-    }
-    @Test
-    public void shouldDeleteClient() throws Exception {
-
-        //Given & When & Then
-        mockMvc.perform(delete("/v1/clients/1")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-        verify(clientFacade,  times(1)).deletedById(any());
-    }
 }

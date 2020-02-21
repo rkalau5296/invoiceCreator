@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class ClientValidator {
     private static final Logger LOGGER = LoggerFactory.getLogger(InvoiceValidator.class);
 
-    public List<Client> validateProducts(final List<Client> clients) {
+    public List<Client> validateClients(final List<Client> clients) {
         LOGGER.info("String filtering clients...");
         List<Client> filteredClients = clients.stream()
                 //.filter(product -> !product.getStatus().equalsIgnoreCase("test"))

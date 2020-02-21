@@ -27,7 +27,7 @@ public class CustomerFacade {
 
     public List<ClientDto> fetchClients() {
         List<Client> clients = clientMapper.mapToListClients(clientDtoService.fetchClients());
-        List<Client> filteredInvoices = clientValidator.validateProducts(clients);
+        List<Client> filteredInvoices = clientValidator.validateClients(clients);
         List<ClientDto> filteredProductsDto = clientMapper.mapToListClientDto(filteredInvoices);
         return filteredProductsDto;
     }

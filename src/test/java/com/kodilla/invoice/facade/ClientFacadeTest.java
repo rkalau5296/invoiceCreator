@@ -23,12 +23,13 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ClientFacadeTest {
+
     @InjectMocks
     private ClientFacade clientFacade;
     @Mock
-    private ClientMapper clientMapper;
-    @Mock
     private ClientService clientService;
+    @Mock
+    private ClientMapper clientMapper;
 
     @Test
     public void shouldGetAllClientsFromDb() {
@@ -60,7 +61,7 @@ public class ClientFacadeTest {
     public void shouldGetClientFromDbById() {
         //Given
         Client client = new Client(1L, "name", "tax_no", "bank", "bank_account", "city", "country", "email", "person", "post_code", "phone", "street", "street_no");
-        when(clientFacade.getClientFromDbById(1L)).thenReturn(client);
+        when(clientService.getClientsByIdFromDb(1L)).thenReturn(client);
 
         //When
         Client anotherClient =  clientFacade.getClientFromDbById(1L);
@@ -86,8 +87,8 @@ public class ClientFacadeTest {
         //Given
         Client client = new Client(1L, "name", "tax_no", "bank", "bank_account", "city", "country", "email", "person", "post_code", "phone", "street", "street_no");
         CustomerDto customerDto = new CustomerDto(1L, "api_token", client);
-        when(clientFacade.createClient(customerDto)).thenReturn(client);
-
+        when(clientMapper.mapToClientFromCustomerDto(customerDto)).thenReturn(client);
+        when(clientService.save(client)).thenReturn(client);
         //When
         Client anotherClient = clientFacade.createClient(customerDto);
         //Then

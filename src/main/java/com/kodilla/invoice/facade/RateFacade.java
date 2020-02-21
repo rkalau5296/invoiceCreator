@@ -26,7 +26,6 @@ public class RateFacade {
         return rateMapper.mapToRateTablesDto(rates);
     }
     public RateCurrencyDto fetchRateAParticularCurrency(String table, String code) {
-        //RateTable rate = rateMapper.mapToRateTable(rateDtoService.fetchRateAParticularcurrency(table, code));
         return rateDtoService.fetchRateAParticularcurrency(table, code);
     }
 }

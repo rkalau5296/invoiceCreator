@@ -21,7 +21,7 @@ public class RateTableDto {
     @JsonProperty("no")
     private String no;
     @JsonProperty("effectiveDate")
-    private Date effectiveDate;
+    private String effectiveDate;
     @JsonProperty("rates")
     private List<RateDto> rates;
 }

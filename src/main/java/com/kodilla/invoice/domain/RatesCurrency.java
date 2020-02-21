@@ -12,6 +12,6 @@ import java.util.Date;
 public class RatesCurrency {
 
     String no;
-    private Date effectiveDate;
+    private String effectiveDate;
     double mid;
 }

@@ -13,6 +13,6 @@ import java.util.List;
 public class RateTable {
     private String table;
     private String no;
-    private Date effectiveDate;
+    private String effectiveDate;
     private List<Rate> rates;
 }

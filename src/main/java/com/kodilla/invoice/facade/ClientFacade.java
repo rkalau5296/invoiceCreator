@@ -25,6 +25,7 @@ public class ClientFacade {
         return clientService.save(clientMapper.mapToClient(clientDto));
     }
     public Client createClient(CustomerDto clientDto) {
+
         return clientService.save(clientMapper.mapToClientFromCustomerDto(clientDto));
     }
     public List<Client> getAllClientsFromDb(){

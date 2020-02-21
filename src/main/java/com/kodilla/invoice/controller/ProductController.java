@@ -16,27 +16,27 @@ public class ProductController {
     private ProductFacade productFacade;
 
     @RequestMapping(method = RequestMethod.GET, value = "/products")
-    public List<Product> getClientsFromDb() {
-        return productFacade.getAllClientsFromDb();
+    public List<Product> getProductsFromDb() {
+        return productFacade.getAllProductsFromDb();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/products/{productId}")
-    public Product getClientByIdFromDb(@PathVariable Long productId) {
-        return productFacade.getClientFromDbById(productId);
+    public Product getProductByIdFromDb(@PathVariable Long productId) {
+        return productFacade.getProductFromDbById(productId);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/products", consumes = APPLICATION_JSON_VALUE)
-    public Product createClient (@RequestBody ProductObjectDto productObjectDto) {
+    public Product createProduct (@RequestBody ProductObjectDto productObjectDto) {
         return productFacade.createProduct(productObjectDto);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/products/{productId}")
-    public void deleteClient (@PathVariable Long productId){
+    public void deleteProduct (@PathVariable Long productId){
         productFacade.deletedById(productId);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/products")
-    public Product updateClient (@RequestBody ProductDto productDto){
-        return productFacade.updateClient(productDto);
+    public Product updateProduct (@RequestBody ProductDto productDto){
+        return productFacade.updateProduct(productDto);
     }
 }

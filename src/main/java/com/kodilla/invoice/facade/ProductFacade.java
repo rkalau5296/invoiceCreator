@@ -20,16 +20,16 @@ public class ProductFacade {
     public void deletedById(Long id) {
         productService.deleteById(id);
     }
-    public Product updateClient(ProductDto productDto) {
+    public Product updateProduct(ProductDto productDto) {
         return productService.save(productMapper.mapToProduct(productDto));
     }
     public Product createProduct (ProductObjectDto productObjectDto) {
         return productService.save(productMapper.mapToProductFromProductObjectDto(productObjectDto));
     }
-    public List<Product> getAllClientsFromDb(){
+    public List<Product> getAllProductsFromDb(){
         return productService.getAllProductsFromDb();
     }
-    public Product getClientFromDbById(Long id){
+    public Product getProductFromDbById(Long id){
         return productService.getProductByIdFromDb(id);
     }
 }

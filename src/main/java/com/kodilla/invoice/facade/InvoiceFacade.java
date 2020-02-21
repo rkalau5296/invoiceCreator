@@ -1,13 +1,11 @@
 package com.kodilla.invoice.facade;
 
-import com.kodilla.invoice.domain.Client;
 import com.kodilla.invoice.domain.Invoice;
 import com.kodilla.invoice.domain.InvoiceDto;
 import com.kodilla.invoice.domain.InvoiceObjectDto;
 import com.kodilla.invoice.mapper.InvoiceMapper;
 import com.kodilla.invoice.service.InvoiceDtoService;
 import com.kodilla.invoice.service.InvoiceService;
-import com.kodilla.invoice.validator.InvoiceValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +16,6 @@ public class InvoiceFacade {
 
     @Autowired
     private InvoiceMapper invoiceMapper;
-    @Autowired
-    private InvoiceValidator invoiceValidator;
     @Autowired
     private InvoiceDtoService invoiceDtoService;
     @Autowired

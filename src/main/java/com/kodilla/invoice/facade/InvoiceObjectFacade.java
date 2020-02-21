@@ -23,9 +23,6 @@ public class InvoiceObjectFacade {
     private InvoiceObjectService invoiceObjectService;
 
     public List<CreatedInvoiceDto> fetchInvoices() {
-//        List<Invoice> products = invoiceMapper.mapToListInvoices(invoiceDtoService.fetchInvoices());
-//        List<Invoice> filteredInvoices = invoiceValidator.validateInvoices(products);
-//        List<InvoiceDto> filteredProductsDto = invoiceMapper.mapToInvoiceDtoList(filteredInvoices);
         return invoiceDtoService.fetchInvoices();
     }
 

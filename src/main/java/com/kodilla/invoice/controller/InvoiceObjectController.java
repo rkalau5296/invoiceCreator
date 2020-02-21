@@ -16,16 +16,16 @@ public class InvoiceObjectController {
     private InvoiceObjectFacade invoiceObjectFacade;
 
     @RequestMapping(method = RequestMethod.GET, value = "/invoices")
-    public List<CreatedInvoiceDto> getProducts() {
+    public List<CreatedInvoiceDto> getInvoices() {
         return invoiceObjectFacade.fetchInvoices();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/invoices/{invoiceId}")
-    public CreatedInvoiceDto getProduct (@PathVariable Long invoiceId) {
+    public CreatedInvoiceDto getInvoice (@PathVariable Long invoiceId) {
         return invoiceObjectFacade.fetchProductById(invoiceId);
     }
     @RequestMapping(method = RequestMethod.POST, value = "/invoices")
-    public CreatedInvoiceDto createProduct (@RequestBody InvoiceObjectDto invoiceObjectDto) {
+    public CreatedInvoiceDto createInvoice (@RequestBody InvoiceObjectDto invoiceObjectDto) {
         return invoiceObjectFacade.createInvoice(invoiceObjectDto);
     }
 }

@@ -22,7 +22,7 @@ public class InvoiceObjectController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/invoices/{invoiceId}")
     public CreatedInvoiceDto getInvoice (@PathVariable Long invoiceId) {
-        return invoiceObjectFacade.fetchProductById(invoiceId);
+        return invoiceObjectFacade.fetchInvoiceById(invoiceId);
     }
     @RequestMapping(method = RequestMethod.POST, value = "/invoices")
     public CreatedInvoiceDto createInvoice (@RequestBody InvoiceObjectDto invoiceObjectDto) {

@@ -57,7 +57,7 @@ public class InvoiceObjectControllerTest {
     public void shouldGetInvoice() throws Exception {
         //Given
         CreatedInvoiceDto createdInvoiceDto = new CreatedInvoiceDto(1L, "price_net","price_gross","buyer_name","product_cache");
-        when(invoiceObjectFacade.fetchProductById(ArgumentMatchers.any(Long.class))).thenReturn(createdInvoiceDto);
+        when(invoiceObjectFacade.fetchInvoiceById(ArgumentMatchers.any(Long.class))).thenReturn(createdInvoiceDto);
 
         //When & Then
         mockMvc.perform(get("/v1/invoiceObject/invoices/1").contentType(MediaType.APPLICATION_JSON))

@@ -14,11 +14,7 @@ import java.util.List;
 public class InvoiceObjectFacade {
 
     @Autowired
-    private InvoiceMapper invoiceMapper;
-    @Autowired
     private InvoiceDtoService invoiceDtoService;
-    @Autowired
-    private InvoiceValidator invoiceValidator;
     @Autowired
     private InvoiceObjectService invoiceObjectService;
 
@@ -26,7 +22,7 @@ public class InvoiceObjectFacade {
         return invoiceDtoService.fetchInvoices();
     }
 
-    public CreatedInvoiceDto fetchProductById(Long id) {
+    public CreatedInvoiceDto fetchInvoiceById(Long id) {
         return invoiceDtoService.fetchInvoiceById(id);
     }
 

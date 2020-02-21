@@ -78,7 +78,7 @@ public class ProductFacadeTest {
         Product anotherProduct = productFacade.createProduct(productObjectDto);
 
         //Then
-
+        assertNotNull(anotherProduct);
         assertEquals("name", anotherProduct.getName());
         assertEquals("code", anotherProduct.getCode());
         assertEquals(10.00, anotherProduct.getPrice_net(), DELTA);

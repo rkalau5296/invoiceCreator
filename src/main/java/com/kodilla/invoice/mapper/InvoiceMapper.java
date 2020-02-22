@@ -20,34 +20,7 @@ public class InvoiceMapper {
                 invoiceDto.getPositions()
         );
     }
-    public InvoiceDto mapToInvoiceDto (final Invoice invoice) {
-        return new InvoiceDto(
-                invoice.getId(),
-                invoice.getPayment_to_kind(),
-                invoice.getClient_id(),
-                invoice.getPositions()
-        );
-    }
-    public List<InvoiceDto> mapToInvoiceDtoList(final List<Invoice> invoiceList) {
-        return invoiceList.stream()
-                .map(t->new InvoiceDto(
-                        t.getId(),
-                        t.getPayment_to_kind(),
-                        t.getClient_id(),
-                        t.getPositions()
-                ))
-                .collect(Collectors.toList());
-    }
-    public List<Invoice> mapToListInvoices(final List<InvoiceDto>  invoiceDto) {
-        return invoiceDto.stream()
-                .map(invoice -> new Invoice(
-                        invoice.getId(),
-                        invoice.getPayment_to_kind(),
-                        invoice.getClient_id(),
-                        invoice.getPositions()
-                ))
-                .collect(toList());
-    }
+
     public Invoice mapToInvoiceFromInvoiceObjectDto (final InvoiceObjectDto invoiceObjectDto) {
         return new Invoice(
                 invoiceObjectDto.getInvoice().getId(),

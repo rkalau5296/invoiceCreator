@@ -61,7 +61,7 @@ public class ClientMapper {
                 clientDto.getClient().getPost_code(),
                 clientDto.getClient().getPhone(),
                 clientDto.getClient().getStreet(),
-                clientDto.getClient().getTax_no()
+                clientDto.getClient().getStreet_no()
         );
     }
 

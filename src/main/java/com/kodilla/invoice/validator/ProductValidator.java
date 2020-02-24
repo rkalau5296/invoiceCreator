@@ -14,11 +14,8 @@ public class ProductValidator {
     private static final Logger LOGGER = LoggerFactory.getLogger(InvoiceValidator.class);
 
     public List<Product> validateProducts(final List<Product> products) {
-        LOGGER.info("String filtering products...");
-        List<Product> filteredProducts = products.stream()
-                //.filter(product -> !product.getStatus().equalsIgnoreCase("test"))
-                .collect(Collectors.toList());
-        LOGGER.info("products have been filtered. Products list size: " + filteredProducts.size());
-        return filteredProducts;
+        LOGGER.info("Start fetching products...");
+        LOGGER.info("Products have been fetched. Products list size: " + products.size());
+        return products;
     }
 }

@@ -13,12 +13,9 @@ public class InvoiceValidator {
     private static final Logger LOGGER = LoggerFactory.getLogger(InvoiceValidator.class);
 
     public List<Invoice> validateInvoices(final List<Invoice> invoices) {
-        LOGGER.info("String filtering invoices...");
-        List<Invoice> filteredInvoices = invoices.stream()
-                //.filter(invoice -> !invoice.getStatus().equalsIgnoreCase("test"))
-                .collect(Collectors.toList());
-        LOGGER.info("Invoices have been filtered. Current list size: " + filteredInvoices.size());
-        return filteredInvoices;
+        LOGGER.info("Starting fetching invoices...");
+        LOGGER.info("Invoices have been fetched. Current list size: " + invoices.size());
+        return invoices;
     }
 
 }

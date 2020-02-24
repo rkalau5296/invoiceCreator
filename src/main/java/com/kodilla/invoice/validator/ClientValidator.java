@@ -13,11 +13,8 @@ public class ClientValidator {
     private static final Logger LOGGER = LoggerFactory.getLogger(InvoiceValidator.class);
 
     public List<Client> validateClients(final List<Client> clients) {
-        LOGGER.info("String filtering clients...");
-        List<Client> filteredClients = clients.stream()
-                //.filter(product -> !product.getStatus().equalsIgnoreCase("test"))
-                .collect(Collectors.toList());
-        LOGGER.info("Clients have been filtered. Current list size: " + filteredClients.size());
-        return filteredClients;
+        LOGGER.info("Start fetching customers...");
+        LOGGER.info("Customers have been fetched. Current list size: " + clients.size());
+        return clients;
     }
 }

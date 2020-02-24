@@ -2,6 +2,7 @@ package com.kodilla.invoice.facade;
 
 import com.kodilla.invoice.domain.*;
 import com.kodilla.invoice.mapper.InvoiceMapper;
+import com.kodilla.invoice.repository.CreatedInvoiceDtoRepository;
 import com.kodilla.invoice.service.InvoiceDtoService;
 import com.kodilla.invoice.service.InvoiceObjectService;
 import com.kodilla.invoice.validator.InvoiceValidator;
@@ -19,9 +20,14 @@ public class InvoiceObjectFacade {
     private InvoiceObjectService invoiceObjectService;
     @Autowired
     private InvoiceValidator invoiceValidator;
+    @Autowired
+    private CreatedInvoiceDtoRepository createdInvoiceDtoRepository;
 
     public List<CreatedInvoiceDto> fetchInvoices() {
         List<CreatedInvoiceDto> filteredInvoices = invoiceDtoService.fetchInvoices();
+        for(CreatedInvoiceDto createdInvoiceDto :filteredInvoices) {
+            createdInvoiceDtoRepository.save(createdInvoiceDto);
+        }
         invoiceValidator.validateInvoices(filteredInvoices);
         return filteredInvoices;
     }

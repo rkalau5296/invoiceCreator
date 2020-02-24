@@ -3,6 +3,7 @@ package com.kodilla.invoice.facade;
 import com.kodilla.invoice.domain.*;
 import com.kodilla.invoice.mapper.ClientMapper;
 import com.kodilla.invoice.mapper.ProductMapper;
+import com.kodilla.invoice.repository.ProductDtoRepository;
 import com.kodilla.invoice.service.*;
 import com.kodilla.invoice.validator.ClientValidator;
 import com.kodilla.invoice.validator.ProductValidator;
@@ -22,9 +23,15 @@ public class ProductObjectFacade {
     private ProductMapper productMapper;
     @Autowired
     private ProductValidator productValidator;
+    @Autowired
+    private ProductDtoRepository productDtoRepository;
 
     public List<ProductDto> fetchProducts() {
-        List<Product> products = productMapper.mapToListProducts(productDtoService.fetchProducts());
+        List<ProductDto> fetchedProducts = productDtoService.fetchProducts();
+        for(ProductDto productDto :fetchedProducts) {
+            productDtoRepository.save(productDto);
+        }
+        List<Product> products = productMapper.mapToListProducts(fetchedProducts);
         List<Product> filteredInvoices = productValidator.validateProducts(products);
         List<ProductDto> filteredProductsDto = productMapper.mapToListProductDto(filteredInvoices);
         return filteredProductsDto;

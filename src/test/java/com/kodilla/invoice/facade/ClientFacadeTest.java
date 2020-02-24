@@ -2,18 +2,14 @@ package com.kodilla.invoice.facade;
 
 import com.kodilla.invoice.domain.Client;
 import com.kodilla.invoice.domain.ClientDto;
-import com.kodilla.invoice.domain.Customer;
 import com.kodilla.invoice.domain.CustomerDto;
 import com.kodilla.invoice.mapper.ClientMapper;
 import com.kodilla.invoice.service.ClientService;
-import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 
 import java.util.ArrayList;
 import java.util.List;

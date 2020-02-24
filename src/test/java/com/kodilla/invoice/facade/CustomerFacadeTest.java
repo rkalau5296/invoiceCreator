@@ -5,6 +5,7 @@ import com.kodilla.invoice.domain.ClientDto;
 import com.kodilla.invoice.domain.CreatedCustomerDto;
 import com.kodilla.invoice.domain.CustomerDto;
 import com.kodilla.invoice.mapper.ClientMapper;
+import com.kodilla.invoice.repository.ClientDtoRepository;
 import com.kodilla.invoice.service.ClientDtoService;
 import com.kodilla.invoice.service.CustomerService;
 import com.kodilla.invoice.validator.ClientValidator;
@@ -33,7 +34,8 @@ public class CustomerFacadeTest {
     private ClientDtoService clientDtoService;
     @Mock
     private CustomerService customerService;
-
+    @Mock
+    private ClientDtoRepository clientDtoRepository;
     @Test
     public void shouldFetchClients() throws Exception {
         //Given
@@ -46,6 +48,9 @@ public class CustomerFacadeTest {
         when(clientMapper.mapToListClients(clientsDto)).thenReturn(clients);
         when(clientMapper.mapToListClientDto(clients)).thenReturn(clientsDto);
         when(clientValidator.validateClients(clients)).thenReturn(clients);
+        for(ClientDto clientDtos : clientsDto) {
+            when(clientDtoRepository.save(clientDtos)).thenReturn(clientDtos);
+        }
         //When
 
         List<ClientDto> anotherClientsDto = customerFacade.fetchClients();

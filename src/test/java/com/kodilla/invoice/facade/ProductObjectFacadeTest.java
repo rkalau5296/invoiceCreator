@@ -1,10 +1,8 @@
 package com.kodilla.invoice.facade;
 
-import com.kodilla.invoice.domain.CreatedProductDto;
-import com.kodilla.invoice.domain.Product;
-import com.kodilla.invoice.domain.ProductDto;
-import com.kodilla.invoice.domain.ProductObjectDto;
+import com.kodilla.invoice.domain.*;
 import com.kodilla.invoice.mapper.ProductMapper;
+import com.kodilla.invoice.repository.ProductDtoRepository;
 import com.kodilla.invoice.service.ProductDtoService;
 import com.kodilla.invoice.service.ProductObjectService;
 import com.kodilla.invoice.validator.ProductValidator;
@@ -13,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +34,8 @@ public class ProductObjectFacadeTest {
     private ProductMapper productMapper;
     @Mock
     private ProductValidator productValidator;
-
+    @Mock
+    private ProductDtoRepository productDtoRepository;
     @Test
     public void shouldFetchProducts() throws Exception {
 
@@ -49,7 +49,9 @@ public class ProductObjectFacadeTest {
         when(productMapper.mapToListProductDto(productList)).thenReturn(productDtoList);
         when(productMapper.mapToListProducts(productDtoList)).thenReturn(productList);
         when(productValidator.validateProducts(productList)).thenReturn(productList);
-
+        for(ProductDto productDto : productDtoList) {
+            when(productDtoRepository.save(productDto)).thenReturn(productDto);
+        }
         //When
         List<ProductDto> productsDto = productObjectFacade.fetchProducts();
 

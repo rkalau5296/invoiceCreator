@@ -4,6 +4,8 @@ import com.kodilla.invoice.domain.CreatedInvoiceDto;
 import com.kodilla.invoice.domain.Invoice;
 import com.kodilla.invoice.domain.InvoiceObjectDto;
 import com.kodilla.invoice.domain.InvoicePosition;
+import com.kodilla.invoice.repository.CreatedInvoiceDtoRepository;
+import com.kodilla.invoice.repository.InvoiceDtoRepository;
 import com.kodilla.invoice.service.InvoiceDtoService;
 import com.kodilla.invoice.service.InvoiceObjectService;
 import com.kodilla.invoice.validator.InvoiceValidator;
@@ -30,6 +32,8 @@ public class InvoiceObjectFacadeTest {
     private InvoiceObjectService invoiceObjectService;
     @Mock
     private InvoiceValidator invoiceValidator;
+    @Mock
+    private CreatedInvoiceDtoRepository createdInvoiceDtoRepository;
     @Test
     public void shouldFetchInvoices() throws Exception {
         //Given
@@ -38,7 +42,9 @@ public class InvoiceObjectFacadeTest {
 
         when(invoiceDtoService.fetchInvoices()).thenReturn(createdInvoiceDtos);
         when(invoiceValidator.validateInvoices(createdInvoiceDtos)).thenReturn(createdInvoiceDtos);
-
+        for(CreatedInvoiceDto createdInvoiceDto : createdInvoiceDtos) {
+            when(createdInvoiceDtoRepository.save(createdInvoiceDto)).thenReturn(createdInvoiceDto);
+        }
         //When
         List<CreatedInvoiceDto> createdInvoiceDtoList = invoiceObjectFacade.fetchInvoices();
 

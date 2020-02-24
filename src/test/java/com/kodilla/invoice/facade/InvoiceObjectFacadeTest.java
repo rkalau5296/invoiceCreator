@@ -6,6 +6,7 @@ import com.kodilla.invoice.domain.InvoiceObjectDto;
 import com.kodilla.invoice.domain.InvoicePosition;
 import com.kodilla.invoice.service.InvoiceDtoService;
 import com.kodilla.invoice.service.InvoiceObjectService;
+import com.kodilla.invoice.validator.InvoiceValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -27,6 +28,8 @@ public class InvoiceObjectFacadeTest {
     private InvoiceDtoService invoiceDtoService;
     @Mock
     private InvoiceObjectService invoiceObjectService;
+    @Mock
+    private InvoiceValidator invoiceValidator;
     @Test
     public void shouldFetchInvoices() throws Exception {
         //Given
@@ -34,6 +37,7 @@ public class InvoiceObjectFacadeTest {
         createdInvoiceDtos.add(new CreatedInvoiceDto(1L, "price_net", "price_gross", "buyer_name", "product_cache"));
 
         when(invoiceDtoService.fetchInvoices()).thenReturn(createdInvoiceDtos);
+        when(invoiceValidator.validateInvoices(createdInvoiceDtos)).thenReturn(createdInvoiceDtos);
 
         //When
         List<CreatedInvoiceDto> createdInvoiceDtoList = invoiceObjectFacade.fetchInvoices();

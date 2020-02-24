@@ -17,9 +17,13 @@ public class InvoiceObjectFacade {
     private InvoiceDtoService invoiceDtoService;
     @Autowired
     private InvoiceObjectService invoiceObjectService;
+    @Autowired
+    private InvoiceValidator invoiceValidator;
 
     public List<CreatedInvoiceDto> fetchInvoices() {
-        return invoiceDtoService.fetchInvoices();
+        List<CreatedInvoiceDto> filteredInvoices = invoiceDtoService.fetchInvoices();
+        invoiceValidator.validateInvoices(filteredInvoices);
+        return filteredInvoices;
     }
 
     public CreatedInvoiceDto fetchInvoiceById(Long id) {

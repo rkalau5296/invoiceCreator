@@ -1,5 +1,6 @@
 package com.kodilla.invoice.validator;
 
+import com.kodilla.invoice.domain.CreatedInvoiceDto;
 import com.kodilla.invoice.domain.Invoice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 public class InvoiceValidator {
     private static final Logger LOGGER = LoggerFactory.getLogger(InvoiceValidator.class);
 
-    public List<Invoice> validateInvoices(final List<Invoice> invoices) {
+    public List<CreatedInvoiceDto> validateInvoices(final List<CreatedInvoiceDto> invoices) {
         LOGGER.info("Starting fetching invoices...");
         LOGGER.info("Invoices have been fetched. Current list size: " + invoices.size());
         return invoices;

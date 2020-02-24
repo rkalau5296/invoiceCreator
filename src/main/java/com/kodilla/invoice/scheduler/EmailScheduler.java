@@ -15,8 +15,8 @@ public class EmailScheduler {
     @Autowired
     private SimpleEmailService simpleEmailService;
 
-    private static final String SUBJECT = "Tasks: Once a day email";
-    private String setText = "Przypominam o wysłaniu codziennych płatności do zdefiniowanych kontrahentów. ";
+    private static final String SUBJECT = "Daily reminder";
+    private String setText = "UWAGA!!! Przypominam o wysłaniu codziennych płatności do zdefiniowanych kontrahentów. ";
 
     @Scheduled(cron = "0 0 10 * * *")
     //@Scheduled(fixedDelay = 10000)

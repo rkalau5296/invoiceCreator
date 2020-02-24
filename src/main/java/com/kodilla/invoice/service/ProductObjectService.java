@@ -23,7 +23,7 @@ public class ProductObjectService {
     public CreatedProductDto createProduct(final ProductObjectDto productObjectDto) {
         CreatedProductDto newProduct = invoiceClient.postProduct(productObjectDto);
                 ofNullable(newProduct).ifPresent(product->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,
-                "New product: "+ product.getName() + " has been created.")));
+                "New product: "+ product.getName() + " has been created, and sent to fakturownia.pl.")));
 
         return newProduct;
     }

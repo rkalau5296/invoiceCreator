@@ -24,7 +24,7 @@ public class CustomerService {
     public CreatedCustomerDto createCustomer(final CustomerDto customerDto) {
         CreatedCustomerDto newCustomer = invoiceClient.postCustomer(customerDto);
                 ofNullable(newCustomer).ifPresent(customer->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,
-                "New customer: "+ customer.getName() + " has been created")));
+                "New customer: "+ customer.getName() + " has been created, and sent to fakturownia.pl.")));
 
         return newCustomer;
     }

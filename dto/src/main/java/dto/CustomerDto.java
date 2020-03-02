@@ -12,5 +12,5 @@ public class CustomerDto {
 
     private Long id;
     private String api_token;
-    private Client client;
+    private ClientDto client;
 }

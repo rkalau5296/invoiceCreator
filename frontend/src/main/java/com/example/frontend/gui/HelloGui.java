@@ -1,4 +1,4 @@
-package com.example.frontend;
+package com.example.frontend.gui;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.icon.Icon;

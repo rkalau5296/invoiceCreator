@@ -23,5 +23,5 @@ public class RateTableDto {
     @JsonProperty("effectiveDate")
     private String effectiveDate;
     @JsonProperty("rates")
-    private List<com.kodilla.invoice.domain.RateDto> rates;
+    private List<RateDto> rates;
 }

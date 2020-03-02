@@ -7,8 +7,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class ProductObjectDto {
+
+public class InvoicePosition {
+
     private Long id;
-    private String api_token;
-    private ProductDto product;
+
+    private int product_id;
+
+    private int quantity;
 }

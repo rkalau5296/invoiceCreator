@@ -4,11 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-public class ProductObjectDto {
-    private Long id;
-    private String api_token;
-    private ProductDto product;
+public class RatesCurrency {
+
+    String no;
+    private String effectiveDate;
+    double mid;
 }

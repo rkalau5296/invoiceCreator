@@ -11,5 +11,5 @@ public class InvoiceObjectDto {
 
     private Long id;
     private String api_token;
-    private Invoice invoice;
+    private InvoiceDto invoice;
 }

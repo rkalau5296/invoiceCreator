@@ -1,4 +1,4 @@
-package com.kodilla.invoice.domain;
+package dto;
 
 
 import lombok.AllArgsConstructor;

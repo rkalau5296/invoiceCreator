@@ -1,1 +1,3 @@
 rootProject.name = 'invoice'
+include 'dto', 'frontend'
+

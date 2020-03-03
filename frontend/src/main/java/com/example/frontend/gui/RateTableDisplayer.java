@@ -22,7 +22,7 @@ public class RateTableDisplayer extends VerticalLayout {
     private Grid<RateTable> tableGrid;
     private Grid<RateDto> rateGrid;
     private Grid<RateCurrencyDto> currencyGrid;
-    private Grid<RatesCurrency> currencyRateGrid;
+
     @Autowired
     private FrontendClient frontendClient;
     @Autowired
@@ -38,7 +38,7 @@ public class RateTableDisplayer extends VerticalLayout {
         currencyField = new TextField("Podaj walutę");
         Button buttonCurrency = new Button("Pobierz podaną walutę");
         currencyGrid = new Grid<>(RateCurrencyDto.class);
-        currencyRateGrid = new Grid<>(RatesCurrency.class);
+
         buttonGetRates.addClickListener(buttonClickEvent -> addRatesToGrid());
         buttonGetRatesInDateRangeFromTo.addClickListener(buttonClickEvent -> addRatesInDateRangeFromTo());
         buttonCurrency.addClickListener(buttonClickEvent-> fetchApArticularCurrency());

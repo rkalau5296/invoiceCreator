@@ -144,6 +144,7 @@ public class InvoiceClient {
             return  new CreatedCustomerDto();
         }
     }
+
     public CreatedProductDto postProduct(final ProductObjectDto productObjectDto){
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/products.json")
 
@@ -156,6 +157,7 @@ public class InvoiceClient {
             return  new CreatedProductDto();
         }
     }
+
     public CreatedInvoiceDto postInvoice(final InvoiceObjectDto invoiceObjectDto){
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/invoices.json")
 

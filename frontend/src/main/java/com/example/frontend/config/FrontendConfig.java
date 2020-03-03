@@ -9,4 +9,6 @@ import org.springframework.stereotype.Component;
 public class FrontendConfig {
     @Value("${api.endpoint.rate}")
     private String rateEndPoint;
+    @Value("${token}")
+    private String invoiceToken;
 }

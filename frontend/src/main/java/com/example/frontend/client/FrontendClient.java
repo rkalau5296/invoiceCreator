@@ -38,6 +38,7 @@ public class FrontendClient {
             return  new ArrayList<>();
         }
     }
+
     public List<RateTableDto> getRatesInDateRangeFromTo(String table, String startDate, String endDate){
         URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/rates/" + table + "/" + startDate + "/" + endDate)
                 .build().encode().toUri();
@@ -61,6 +62,7 @@ public class FrontendClient {
             return new RateCurrencyDto();
         }
     }
+
     public List<CreatedInvoiceDto> getInvoices(){
         URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/invoiceObject/invoices")
                 .build().encode().toUri();
@@ -121,6 +123,18 @@ public class FrontendClient {
         }
     }
 
+    public List<ProductDto> getProductsFromDb(){
+        URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/products")
+                .build().encode().toUri();
+        try{
+            ProductDto[] clientResponse = restTemplate.getForObject(uri, ProductDto[].class);
+            return Arrays.asList(Optional.ofNullable(clientResponse).orElse(new ProductDto[0]));
+        }catch(RestClientException e){
+            LOGGER.error(e.getMessage(), e);
+            return  new ArrayList<>();
+        }
+    }
+
     public ProductDto getProductById(Long id){
         URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/productObject/products" + id)
                 .build().encode().toUri();
@@ -132,10 +146,6 @@ public class FrontendClient {
             return  new ProductDto();
         }
     }
-
-
-
-
 
     public CreatedCustomerDto postCustomer(final CustomerDto customerDto){
         URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/customers")
@@ -149,6 +159,7 @@ public class FrontendClient {
             return  new CreatedCustomerDto();
         }
     }
+
     public CreatedProductDto postProduct(final ProductObjectDto productObjectDto){
         URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/productObject/products")
 
@@ -161,6 +172,19 @@ public class FrontendClient {
             return  new CreatedProductDto();
         }
     }
+    public CreatedProductDto postProductToDb (final ProductObjectDto productObjectDto){
+        URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/products")
+
+                .build().encode().toUri();
+        try{
+            CreatedProductDto clientDtoResponse = restTemplate.postForObject(uri, productObjectDto, CreatedProductDto.class);
+            return clientDtoResponse;
+        }catch(RestClientException e){
+            LOGGER.error(e.getMessage(), e);
+            return  new CreatedProductDto();
+        }
+    }
+
     public CreatedInvoiceDto postInvoice(final InvoiceObjectDto invoiceObjectDto){
         URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/invoiceObject/invoices")
 

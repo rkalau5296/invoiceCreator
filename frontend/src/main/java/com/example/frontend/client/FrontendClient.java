@@ -38,6 +38,29 @@ public class FrontendClient {
             return  new ArrayList<>();
         }
     }
+    public List<RateTableDto> getRatesInDateRangeFromTo(String table, String startDate, String endDate){
+        URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/rates/" + table + "/" + startDate + "/" + endDate)
+                .build().encode().toUri();
+        try{
+            RateTableDto[] rateResponse = restTemplate.getForObject(uri, RateTableDto[].class);
+            return Arrays.asList(Optional.ofNullable(rateResponse).orElse(new RateTableDto[0]));
+        }catch(RestClientException e){
+            LOGGER.error(e.getMessage(), e);
+            return  new ArrayList<>();
+        }
+    }
+
+    public RateCurrencyDto getRateAPArticularCurrency(String table, String code){
+        URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/rates/" + table + "/" + code)
+                .build().encode().toUri();
+        try{
+            RateCurrencyDto rateResponse = restTemplate.getForObject(uri, RateCurrencyDto.class);
+            return rateResponse;
+        }catch(RestClientException e){
+            LOGGER.error(e.getMessage(), e);
+            return new RateCurrencyDto();
+        }
+    }
     public List<CreatedInvoiceDto> getInvoices(){
         URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/invoiceObject/invoices")
                 .build().encode().toUri();
@@ -112,29 +135,7 @@ public class FrontendClient {
 
 
 
-    public List<RateTableDto> getRatesInDateRangeFromTo(String table, String startDate, String endDate){
-        URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/rates/" + table + "/" + startDate + "/" + endDate)
-                .build().encode().toUri();
-        try{
-            RateTableDto[] rateResponse = restTemplate.getForObject(uri, RateTableDto[].class);
-            return Arrays.asList(Optional.ofNullable(rateResponse).orElse(new RateTableDto[0]));
-        }catch(RestClientException e){
-            LOGGER.error(e.getMessage(), e);
-            return  new ArrayList<>();
-        }
-    }
 
-    public RateCurrencyDto getRateAPArticularCurrency(String table, String code){
-        URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/rates/" + table + "/" + code)
-                .build().encode().toUri();
-        try{
-            RateCurrencyDto rateResponse = restTemplate.getForObject(uri, RateCurrencyDto.class);
-            return rateResponse;
-        }catch(RestClientException e){
-            LOGGER.error(e.getMessage(), e);
-            return new RateCurrencyDto();
-        }
-    }
 
     public CreatedCustomerDto postCustomer(final CustomerDto customerDto){
         URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/customers")

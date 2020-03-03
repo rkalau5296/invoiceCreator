@@ -43,9 +43,9 @@ public class ProductDisplayer  extends VerticalLayout{
         price_net = new TextField("Podaj cenę netto produktu.");
         tax = new TextField("Podaj wysokość podatku.");
         addProductButton = new Button("Dodaj produkt do bazy fakturownia.pl");
-        addProductButton.addClickListener(buttonClickEvent-> addProductToFakturowniaPl());
+        addProductButton.addClickListener(buttonClickEvent-> frontendClient.postProduct(createProductObjectDto()));
         addProductToDbButton = new Button("Dodaj produkt do bazy danych.");
-        addProductToDbButton.addClickListener(buttonClickEvent-> addProductToDb());
+        addProductToDbButton.addClickListener(buttonClickEvent-> frontendClient.postProductToDb(createProductObjectDto()));
         add(getProductButton, getProductButtonFromExternalApi,rateGrid, code, name, price_net,tax, addProductButton,addProductToDbButton);
     }
 
@@ -57,7 +57,7 @@ public class ProductDisplayer  extends VerticalLayout{
         List<ProductDto> productDtos = frontendClient.getProducts();
         rateGrid.setItems(productDtos);
     }
-    public void addProductToFakturowniaPl() {
+    public ProductObjectDto createProductObjectDto() {
 
         ProductDto productDto = new ProductDto();
         productDto.setCode(code.getValue());
@@ -68,19 +68,6 @@ public class ProductDisplayer  extends VerticalLayout{
         ProductObjectDto productObjectDto = new ProductObjectDto();
         productObjectDto.setApi_token(frontendConfig.getInvoiceToken());
         productObjectDto.setProduct(productDto);
-        frontendClient.postProduct(productObjectDto);
-    }
-    public void addProductToDb() {
-        ProductDto productDto = new ProductDto();
-        productDto.setCode(code.getValue());
-        productDto.setName(name.getValue());
-        productDto.setPrice_net(Double.parseDouble(price_net.getValue()));
-        productDto.setTax(tax.getValue());
-
-        ProductObjectDto productObjectDto = new ProductObjectDto();
-        productObjectDto.setApi_token(frontendConfig.getInvoiceToken());
-        productObjectDto.setProduct(productDto);
-        frontendClient.postProductToDb(productObjectDto);
-
+        return productObjectDto;
     }
 }

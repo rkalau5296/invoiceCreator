@@ -1,5 +1,6 @@
 package com.example.frontend.gui;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -17,7 +18,10 @@ public class MainPage extends HorizontalLayout{
         Button buttonInvoice = new Button("Faktura", new Icon(VaadinIcon.ACADEMY_CAP));
         Button buttonExchangeRates = new Button("Kursy Walut", new Icon(VaadinIcon.ACADEMY_CAP));
         //Label label = new Label();
-
+        buttonExchangeRates.addClickListener(buttonClickEvent -> openPage());
         add(buttonClient, buttonProduct, buttonInvoice, buttonExchangeRates);
+    }
+    public void openPage() {
+        UI.getCurrent().navigate("ratetabledisplayer");
     }
 }

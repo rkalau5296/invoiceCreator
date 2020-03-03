@@ -28,7 +28,7 @@ public class FrontendClient {
 
 
     public List<RateTableDto> getRates(String table){
-        URI uri = UriComponentsBuilder.fromHttpUrl(frontendConfig.getRateEndPoint() + "/rates/" + table)
+        URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/rates/" + table)
                 .build().encode().toUri();
         try{
             RateTableDto[] rateResponse = restTemplate.getForObject(uri, RateTableDto[].class);

@@ -12,5 +12,5 @@ public class RateTable {
     private String table;
     private String no;
     private String effectiveDate;
-    private List<RateDto> rates;
+
 }

@@ -10,9 +10,11 @@ import com.vaadin.flow.router.Route;
 import dto.RateDto;
 import dto.RateTableDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
-
+@Component
 @Route
 public class RateTableDisplayer extends VerticalLayout {
 
@@ -34,17 +36,14 @@ public class RateTableDisplayer extends VerticalLayout {
     }
 
     public void addRatesToGrid(){
+
         RateTable rateTable = new RateTable();
         rateTable.setTable(textField.getValue());
         List<RateTableDto> rateTableDtos = frontendClient.getRates(textField.getValue());
         rateTable.setNo(rateTableDtos.get(0).getNo());
         rateTable.setEffectiveDate(rateTableDtos.get(0).getEffectiveDate());
-        rateTable.setRates(rateTableDtos.get(0).getRates());
-        RateDto rateDto = new RateDto();
-        rateDto.setCurrency(rateTableDtos.get(0).getRates().get(0).getCurrency());
-        rateDto.setCode(rateTableDtos.get(0).getRates().get(0).getCode());
-        rateDto.setMid(rateTableDtos.get(0).getRates().get(0).getMid());
+        List<RateDto> rateDtoList = rateTableDtos.get(0).getRates();
+        rateGrid.setItems(rateDtoList);
         tableGrid.setItems(rateTable);
-        rateGrid.setItems(rateDto);
     }
 }

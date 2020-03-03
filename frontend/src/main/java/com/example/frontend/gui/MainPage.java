@@ -7,10 +7,10 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
 
 
-@Route("hello")
-public class HelloGui extends HorizontalLayout{
+@Route("MainPage")
+public class MainPage extends HorizontalLayout{
 
-    public HelloGui() {
+    public MainPage() {
         //TextField textField = new TextField("Tekścior");
         Button buttonClient = new Button("Klient", new Icon(VaadinIcon.ACADEMY_CAP));
         Button buttonProduct = new Button("Produkt", new Icon(VaadinIcon.ACADEMY_CAP));

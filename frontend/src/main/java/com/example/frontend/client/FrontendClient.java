@@ -172,6 +172,18 @@ public class FrontendClient {
             return  new CreatedProductDto();
         }
     }
+//    public CreatedProductDto deleteProductFromFakturownia(final ProductObjectDto productObjectDto){
+//        URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/productObject/products")
+//
+//                .build().encode().toUri();
+//        try{
+//            CreatedProductDto clientDtoResponse = restTemplate.delete(uri, productObjectDto);
+//            return clientDtoResponse;
+//        }catch(RestClientException e){
+//            LOGGER.error(e.getMessage(), e);
+//            return  new CreatedProductDto();
+//        }
+//    }
     public CreatedProductDto postProductToDb (final ProductObjectDto productObjectDto){
         URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/products")
 
@@ -197,4 +209,5 @@ public class FrontendClient {
             return  new CreatedInvoiceDto();
         }
     }
+
 }

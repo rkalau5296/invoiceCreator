@@ -17,13 +17,11 @@ public class InvoiceFacade {
     @Autowired
     private InvoiceMapper invoiceMapper;
     @Autowired
-    private InvoiceDtoService invoiceDtoService;
-    @Autowired
     private InvoiceService invoiceService;
 
 
     public void deletedById(Long id) {
-        invoiceDtoService.deleteById(id);
+        invoiceService.deleteById(id);
     }
 
     public Invoice updateInvoice(InvoiceDto invoiceDto) {

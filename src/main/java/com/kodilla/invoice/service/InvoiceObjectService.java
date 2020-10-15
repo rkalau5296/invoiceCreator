@@ -20,10 +20,21 @@ public class InvoiceObjectService {
 
     private static final String SUBJECT = "New Invoice ";
     public CreatedInvoiceDto createInvoice(final InvoiceObjectDto invoiceObjectDto) {
-        CreatedInvoiceDto newProduct = invoiceClient.postInvoice(invoiceObjectDto);
-                ofNullable(newProduct).ifPresent(invoiceDto->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,
+        CreatedInvoiceDto newInvoice = invoiceClient.postInvoice(invoiceObjectDto);
+                ofNullable(newInvoice).ifPresent(invoiceDto->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,
             "New invoice to: "+ invoiceDto.getBuyer_name() + " has been created, and sent to fakturownia.pl.")));
 
-        return newProduct;
+        return newInvoice;
+    }
+    public void deleteById(Long id) {
+        invoiceClient.deleteById(id);
+    }
+    public CreatedInvoiceDto updateInvoice(final BuyerDto buyerDto, long id){
+        CreatedInvoiceDto updateInvoice = invoiceClient.updateInvoice(buyerDto, id);
+        ofNullable(updateInvoice).ifPresent(invoiceDto->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,
+                "The invoice id = " + id+ " has been updated, and sent to fakturownia.pl.")));
+
+        return updateInvoice;
+
     }
 }

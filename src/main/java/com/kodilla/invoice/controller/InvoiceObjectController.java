@@ -1,6 +1,9 @@
 package com.kodilla.invoice.controller;
 
-import com.kodilla.invoice.domain.*;
+//import com.kodilla.invoice.domain.*;
+import com.kodilla.invoice.domain.BuyerDto;
+import com.kodilla.invoice.domain.CreatedInvoiceDto;
+import com.kodilla.invoice.domain.InvoiceObjectDto;
 import com.kodilla.invoice.facade.InvoiceObjectFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,5 +30,14 @@ public class InvoiceObjectController {
     @RequestMapping(method = RequestMethod.POST, value = "/invoices")
     public CreatedInvoiceDto createInvoice (@RequestBody InvoiceObjectDto invoiceObjectDto) {
         return invoiceObjectFacade.createInvoice(invoiceObjectDto);
+    }
+    @RequestMapping(method = RequestMethod.DELETE, value = "/invoices/{invoiceId}")
+    public void deleteInvoice (@PathVariable Long invoiceId){
+        invoiceObjectFacade.deletedById(invoiceId);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/invoices/{invoiceId}")
+    public CreatedInvoiceDto updateInvoice (@RequestBody BuyerDto buyerDto, @PathVariable Long invoiceId){
+        return invoiceObjectFacade.updateInvoice(buyerDto,invoiceId);
     }
 }

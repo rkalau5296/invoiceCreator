@@ -43,8 +43,8 @@ public class InvoiceObjectFacade {
     public void deletedById(Long id) {
         invoiceObjectService.deleteById(id);
     }
-    public CreatedInvoiceDto updateInvoice(final BuyerDto buyerDto, long id) {
+    public void updateInvoice(final BuyerDto buyerDto, Long id) {
 
-        return invoiceObjectService.updateInvoice(buyerDto, id);
+         invoiceObjectService.updateInvoice(buyerDto, id);
     }
 }

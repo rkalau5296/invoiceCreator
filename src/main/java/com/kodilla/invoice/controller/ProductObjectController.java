@@ -1,7 +1,6 @@
 package com.kodilla.invoice.controller;
 
 import com.kodilla.invoice.domain.*;
-import com.kodilla.invoice.facade.CustomerFacade;
 import com.kodilla.invoice.facade.ProductObjectFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,4 +28,14 @@ public class ProductObjectController {
     public CreatedProductDto createProduct (@RequestBody ProductObjectDto productObjectDto) {
         return productObjectFacade.createProduct(productObjectDto);
     }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/products/{productId}")
+    public void deleteProduct (@PathVariable Long productId){
+        productObjectFacade.deletedById(productId);
+    }
+    @RequestMapping(method = RequestMethod.PUT, value = "/products/{productId}")
+    public void updateProduct (@RequestBody UpdateProductDto productObjectDto, @PathVariable Long productId){
+        productObjectFacade.updateProduct(productObjectDto,productId);
+    }
+
 }

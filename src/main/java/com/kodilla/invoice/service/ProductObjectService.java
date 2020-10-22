@@ -2,10 +2,7 @@ package com.kodilla.invoice.service;
 
 import com.kodilla.invoice.client.InvoiceClient;
 import com.kodilla.invoice.config.AdminConfig;
-import com.kodilla.invoice.domain.CreatedProductDto;
-import com.kodilla.invoice.domain.CustomerDto;
-import com.kodilla.invoice.domain.Mail;
-import com.kodilla.invoice.domain.ProductObjectDto;
+import com.kodilla.invoice.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import static java.util.Optional.ofNullable;
@@ -26,5 +23,15 @@ public class ProductObjectService {
                 "New product: "+ product.getName() + " has been created, and sent to fakturownia.pl.")));
 
         return newProduct;
+    }
+    public void deleteById(Long id) {
+        invoiceClient.deleteProductById(id);
+    }
+    public void updateProduct(UpdateProductDto productObjectDto, Long productId) {
+
+//        ofNullable(updateProduct).ifPresent(invoiceDto->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,
+//                "The invoice id = " + productId + " has been updated, and sent to fakturownia.pl.")));
+
+        invoiceClient.updateProduct(productObjectDto, productId);;
     }
 }

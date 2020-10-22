@@ -1,7 +1,9 @@
 package com.kodilla.invoice.service;
 
 import com.kodilla.invoice.client.InvoiceClient;
+import com.kodilla.invoice.domain.CreatedProductDto;
 import com.kodilla.invoice.domain.ProductDto;
+import com.kodilla.invoice.domain.ProductObjectDto;
 import com.kodilla.invoice.repository.ProductDtoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,4 +32,6 @@ public class ProductDtoService {
     public void deleteById(Long id) {
         productDtoRepository.deleteById(id);
     }
+
+
 }

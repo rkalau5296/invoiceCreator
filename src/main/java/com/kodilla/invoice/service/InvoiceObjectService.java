@@ -29,12 +29,12 @@ public class InvoiceObjectService {
     public void deleteById(Long id) {
         invoiceClient.deleteById(id);
     }
-    public CreatedInvoiceDto updateInvoice(final BuyerDto buyerDto, long id){
-        CreatedInvoiceDto updateInvoice = invoiceClient.updateInvoice(buyerDto, id);
-        ofNullable(updateInvoice).ifPresent(invoiceDto->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,
-                "The invoice id = " + id+ " has been updated, and sent to fakturownia.pl.")));
+    public void updateInvoice(final BuyerDto buyerDto, Long id){
+//
+//        ofNullable(updateInvoice).ifPresent(invoiceDto->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,
+//                "The invoice id = " + id+ " has been updated, and sent to fakturownia.pl.")));
 
-        return updateInvoice;
+         invoiceClient.updateInvoice(buyerDto, id);;
 
     }
 }

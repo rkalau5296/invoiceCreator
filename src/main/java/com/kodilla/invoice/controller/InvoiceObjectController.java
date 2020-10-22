@@ -37,7 +37,7 @@ public class InvoiceObjectController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/invoices/{invoiceId}")
-    public CreatedInvoiceDto updateInvoice (@RequestBody BuyerDto buyerDto, @PathVariable Long invoiceId){
-        return invoiceObjectFacade.updateInvoice(buyerDto,invoiceId);
+    public void updateInvoice (@RequestBody BuyerDto buyerDto, @PathVariable Long invoiceId){
+         invoiceObjectFacade.updateInvoice(buyerDto,invoiceId);
     }
 }

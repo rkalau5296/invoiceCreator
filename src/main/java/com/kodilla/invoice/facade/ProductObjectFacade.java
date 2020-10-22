@@ -45,5 +45,11 @@ public class ProductObjectFacade {
         return productObjectService.createProduct(productObjectDto);
     }
 
+    public void deletedById(Long id) {
+        productObjectService.deleteById(id);
+    }
 
+    public void updateProduct(UpdateProductDto productObjectDto, Long productId) {
+        productObjectService.updateProduct(productObjectDto, productId);
+    }
 }

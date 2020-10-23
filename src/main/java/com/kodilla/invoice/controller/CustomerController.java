@@ -32,4 +32,14 @@ public class CustomerController {
         return customerFacade.createCustomer(customerDto);
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/customers/{customerId}")
+    public void updateCustomer (@RequestBody CustomerDto customerDto, @PathVariable Long customerId) {
+        customerFacade.updateCustomer(customerDto,customerId);
+    }
+    @RequestMapping(method = RequestMethod.DELETE, value = "/customers/{customerId}")
+    public void deleteCustomer (@PathVariable Long customerId) {
+        customerFacade.deleteCustomer(customerId);
+    }
+
+
 }

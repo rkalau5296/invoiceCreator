@@ -205,5 +205,27 @@ public class InvoiceClient {
             LOGGER.error(e.getMessage(), e);
         }
     }
+    public void updateCustomer(final CustomerDto customerDto, Long id) {
+        URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/clients/" + id + ".json")
+
+                .build().encode().toUri();
+        try{
+            restTemplate.put(uri, customerDto);
+        }catch(RestClientException e){
+            LOGGER.error(e.getMessage(), e);
+        }
+    }
+
+    public void deleteCustomerById(final Long id) {
+        URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/clients/" + id + "json?api_token=" + invoiceConfig.getToken())
+
+                .build().encode().toUri();
+        try{
+            restTemplate.delete(uri);
+
+        }catch(RestClientException e){
+            LOGGER.error(e.getMessage(), e);
+        }
+    }
 
 }

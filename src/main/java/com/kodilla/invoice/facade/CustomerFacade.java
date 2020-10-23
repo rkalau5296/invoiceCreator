@@ -46,5 +46,11 @@ public class CustomerFacade {
     public CreatedCustomerDto createCustomer(final CustomerDto customerDto) {
         return customerService.createCustomer(customerDto);
     }
+    public void updateCustomer(final CustomerDto customerDto, Long id) {
+        customerService.updateCustomer(customerDto, id);
+    }
+    public void deleteCustomer(Long id) {
+        customerService.deleteCustomer(id);
+    }
 
 }

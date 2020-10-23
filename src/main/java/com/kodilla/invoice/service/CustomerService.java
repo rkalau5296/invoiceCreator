@@ -28,4 +28,11 @@ public class CustomerService {
 
         return newCustomer;
     }
+
+    public void updateCustomer(final CustomerDto customerDto, Long id) {
+        invoiceClient.updateCustomer(customerDto, id);
+    }
+    public void deleteCustomer(Long id) {
+        invoiceClient.deleteCustomerById(id);
+    }
 }

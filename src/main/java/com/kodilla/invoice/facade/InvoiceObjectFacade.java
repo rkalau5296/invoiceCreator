@@ -33,18 +33,22 @@ public class InvoiceObjectFacade {
     }
 
     public CreatedInvoiceDto fetchInvoiceById(Long id) {
+        invoiceValidator.validateInvoicesById(id);
         return invoiceDtoService.fetchInvoiceById(id);
     }
 
     public CreatedInvoiceDto createInvoice(final InvoiceObjectDto invoiceObjectDto) {
-        return invoiceObjectService.createInvoice(invoiceObjectDto);
+        CreatedInvoiceDto fetchedInvoice = invoiceObjectService.createInvoice(invoiceObjectDto);
+        invoiceValidator.validateCreatingInvoice(fetchedInvoice);
+        return fetchedInvoice;
     }
 
     public void deletedById(Long id) {
+        invoiceValidator.validateDeletingInvoice(id);
         invoiceObjectService.deleteById(id);
     }
     public void updateInvoice(final BuyerDto buyerDto, Long id) {
-
-         invoiceObjectService.updateInvoice(buyerDto, id);
+        invoiceValidator.validateUpdateInvoice(buyerDto, id);
+        invoiceObjectService.updateInvoice(buyerDto, id);
     }
 }

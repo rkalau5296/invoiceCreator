@@ -19,24 +19,25 @@ public class InvoiceObjectService {
     private AdminConfig adminConfig;
 
     private static final String SUBJECT = "New Invoice ";
+    private static final String SUBJECT_DELETE = "Delete Invoice ";
+    private static final String SUBJECT_UPDATE = "Update Invoice ";
+
     public CreatedInvoiceDto createInvoice(final InvoiceObjectDto invoiceObjectDto) {
         CreatedInvoiceDto newInvoice = invoiceClient.postInvoice(invoiceObjectDto);
                 ofNullable(newInvoice).ifPresent(invoiceDto->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,
             "New invoice to: "+ invoiceDto.getBuyer_name() + " has been created, and sent to fakturownia.pl.")));
-
         return newInvoice;
     }
+
     public void deleteById(Long id) {
-        emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,
+        emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_DELETE,
                 "The invoice id = " + id + " has been deleted from fakturownia.pl."));
         invoiceClient.deleteById(id);
     }
+
     public void updateInvoice(final BuyerDto buyerDto, Long id){
-
-        emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,
+        emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_UPDATE,
                 "The invoice id = " + id + " has been updated, and sent to fakturownia.pl. New buyer name is " + buyerDto));
-
-         invoiceClient.updateInvoice(buyerDto, id);
-
+        invoiceClient.updateInvoice(buyerDto, id);
     }
 }

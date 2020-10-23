@@ -103,7 +103,6 @@ public class InvoiceClient {
     }
     public CreatedProductDto postProduct(final ProductObjectDto productObjectDto){
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/products.json")
-
                 .build().encode().toUri();
         try{
             return restTemplate.postForObject(uri, productObjectDto, CreatedProductDto.class);
@@ -114,7 +113,6 @@ public class InvoiceClient {
     }
     public void updateProduct(final UpdateProductDto productObjectDto, Long id){
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/products/" + id + ".json")
-
                 .build().encode().toUri();
         try{
             restTemplate.put(uri, productObjectDto);
@@ -124,11 +122,9 @@ public class InvoiceClient {
     }
     public void deleteProductById(final Long id) {
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/products/" + id + "json?api_token=" + invoiceConfig.getToken())
-
                 .build().encode().toUri();
         try{
             restTemplate.delete(uri);
-
         }catch(RestClientException e){
             LOGGER.error(e.getMessage(), e);
         }
@@ -158,7 +154,6 @@ public class InvoiceClient {
     }
     public CreatedCustomerDto postCustomer(final CustomerDto customerDto){
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/clients.json")
-
                 .build().encode().toUri();
         try{
             return restTemplate.postForObject(uri, customerDto, CreatedCustomerDto.class);
@@ -169,7 +164,6 @@ public class InvoiceClient {
     }
     public void updateCustomer(final CustomerDto customerDto, Long id) {
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/clients/" + id + ".json")
-
                 .build().encode().toUri();
         try{
             restTemplate.put(uri, customerDto);
@@ -179,11 +173,9 @@ public class InvoiceClient {
     }
     public void deleteCustomerById(final Long id) {
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/clients/" + id + "json?api_token=" + invoiceConfig.getToken())
-
                 .build().encode().toUri();
         try{
             restTemplate.delete(uri);
-
         }catch(RestClientException e){
             LOGGER.error(e.getMessage(), e);
         }

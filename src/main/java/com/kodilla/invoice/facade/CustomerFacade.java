@@ -40,16 +40,20 @@ public class CustomerFacade {
     }
 
     public ClientDto fetchClientById(Long id) {
+        clientValidator.validateCustomerById(id);
         return clientDtoService.fetchClientById(id);
     }
 
     public CreatedCustomerDto createCustomer(final CustomerDto customerDto) {
+        clientValidator.validateCreatingCustomer(customerDto);
         return customerService.createCustomer(customerDto);
     }
     public void updateCustomer(final CustomerDto customerDto, Long id) {
+        clientValidator.validateUpdateCustomer(customerDto, id);
         customerService.updateCustomer(customerDto, id);
     }
     public void deleteCustomer(Long id) {
+        clientValidator.validateDeletingCustomer(id);
         customerService.deleteCustomer(id);
     }
 

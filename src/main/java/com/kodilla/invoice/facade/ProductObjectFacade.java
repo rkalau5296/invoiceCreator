@@ -31,25 +31,27 @@ public class ProductObjectFacade {
         for(ProductDto productDto :fetchedProducts) {
             productDtoRepository.save(productDto);
         }
-        List<Product> products = productMapper.mapToListProducts(fetchedProducts);
-        List<Product> filteredInvoices = productValidator.validateProducts(products);
-        List<ProductDto> filteredProductsDto = productMapper.mapToListProductDto(filteredInvoices);
-        return filteredProductsDto;
+
+        return productMapper.mapToListProductDto(productValidator.validateProducts(productMapper.mapToListProducts(fetchedProducts)));
     }
 
     public ProductDto fetchProductById(Long id) {
+        productValidator.validateProductById(id);
         return productDtoService.fetchProductById(id);
     }
 
     public CreatedProductDto createProduct(final ProductObjectDto productObjectDto) {
+        productValidator.validateCreatingProduct(productObjectDto);
         return productObjectService.createProduct(productObjectDto);
     }
 
     public void deletedById(Long id) {
+        productValidator.validateDeletingProduct(id);
         productObjectService.deleteById(id);
     }
 
-    public void updateProduct(UpdateProductDto productObjectDto, Long productId) {
-        productObjectService.updateProduct(productObjectDto, productId);
+    public void updateProduct(UpdateProductDto productObjectDto, Long id) {
+        productValidator.validateUpdateProduct(productObjectDto,id);
+        productObjectService.updateProduct(productObjectDto, id);
     }
 }

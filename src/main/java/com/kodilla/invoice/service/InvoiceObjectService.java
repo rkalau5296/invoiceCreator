@@ -30,14 +30,15 @@ public class InvoiceObjectService {
     }
 
     public void deleteById(Long id) {
+        invoiceClient.deleteById(id);
         emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_DELETE,
                 "The invoice id = " + id + " has been deleted from fakturownia.pl."));
-        invoiceClient.deleteById(id);
     }
 
     public void updateInvoice(final BuyerDto buyerDto, Long id){
-        emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_UPDATE,
-                "The invoice id = " + id + " has been updated, and sent to fakturownia.pl. New buyer name is " + buyerDto));
         invoiceClient.updateInvoice(buyerDto, id);
+        emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_UPDATE,
+                "The invoice id = " + id + " has been updated, and sent to fakturownia.pl. New buyer name is " + buyerDto.getInvoice().getBuyer_name()));
+
     }
 }

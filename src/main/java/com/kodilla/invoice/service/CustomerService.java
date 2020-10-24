@@ -32,14 +32,14 @@ public class CustomerService {
     }
 
     public void updateCustomer(final CustomerDto customerDto, Long id) {
-        emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_UPDATE,
-                "The customer id = " + id + " has been updated, and sent to fakturownia.pl. New customer name is " + customerDto));
         invoiceClient.updateCustomer(customerDto, id);
+        emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_UPDATE,
+                "The customer id = " + id + " has been updated, and sent to fakturownia.pl. New customer name is " + customerDto.getClient().getName()));
+
     }
     public void deleteCustomer(Long id) {
-
+        invoiceClient.deleteCustomerById(id);
         emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_DELETE,
                 "The customer id = " + id + " has been deleted from fakturownia.pl."));
-        invoiceClient.deleteCustomerById(id);
     }
 }

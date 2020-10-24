@@ -16,6 +16,8 @@ public class ProductObjectService {
     private AdminConfig adminConfig;
 
     private static final String SUBJECT = "New product";
+    private static final String SUBJECT_DELETE = "Delete product ";
+    private static final String SUBJECT_UPDATE = "Update product ";
 
     public CreatedProductDto createProduct(final ProductObjectDto productObjectDto) {
         CreatedProductDto newProduct = invoiceClient.postProduct(productObjectDto);
@@ -26,12 +28,12 @@ public class ProductObjectService {
     }
     public void deleteById(Long id) {
         invoiceClient.deleteProductById(id);
+        emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_DELETE,
+                "The product id = " + id + " has been deleted from fakturownia.pl."));
     }
     public void updateProduct(UpdateProductDto productObjectDto, Long productId) {
-
-//        ofNullable(updateProduct).ifPresent(invoiceDto->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,
-//                "The invoice id = " + productId + " has been updated, and sent to fakturownia.pl.")));
-
-        invoiceClient.updateProduct(productObjectDto, productId);;
+        invoiceClient.updateProduct(productObjectDto, productId);
+        emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_UPDATE,
+                "The product id = " + productId + " has been updated, and sent to fakturownia.pl. New product name is " + productObjectDto.getProduct().getName()));
     }
 }

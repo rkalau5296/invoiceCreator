@@ -6,7 +6,6 @@ import com.kodilla.invoice.domain.CreatedCustomerDto;
 import com.kodilla.invoice.domain.CustomerDto;
 import com.kodilla.invoice.mapper.ClientMapper;
 import com.kodilla.invoice.repository.ClientDtoRepository;
-import com.kodilla.invoice.service.ClientDtoService;
 import com.kodilla.invoice.service.CustomerService;
 import com.kodilla.invoice.validator.ClientValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +21,12 @@ public class CustomerFacade {
     @Autowired
     private ClientMapper clientMapper;
     @Autowired
-    private ClientDtoService clientDtoService;
-    @Autowired
     private ClientValidator clientValidator;
     @Autowired
     private ClientDtoRepository clientDtoRepository;
 
     public List<ClientDto> fetchClients() {
-        List<ClientDto> clientDtoList = clientDtoService.fetchClients();
+        List<ClientDto> clientDtoList = customerService.fetchClients();
         for(ClientDto clientDto :clientDtoList) {
             clientDtoRepository.save(clientDto);
         }
@@ -41,7 +38,7 @@ public class CustomerFacade {
 
     public ClientDto fetchClientById(Long id) {
         clientValidator.validateCustomerById(id);
-        return clientDtoService.fetchClientById(id);
+        return customerService.fetchClientById(id);
     }
 
     public CreatedCustomerDto createCustomer(final CustomerDto customerDto) {

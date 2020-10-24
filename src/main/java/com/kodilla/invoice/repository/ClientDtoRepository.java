@@ -9,6 +9,4 @@ public interface ClientDtoRepository extends CrudRepository<ClientDto, Long> {
     @Override
     ClientDto save (ClientDto clientDto);
 
-    @Override
-    void deleteById(Long id);
 }

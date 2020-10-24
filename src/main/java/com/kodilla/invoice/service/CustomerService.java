@@ -2,11 +2,14 @@ package com.kodilla.invoice.service;
 
 import com.kodilla.invoice.client.InvoiceClient;
 import com.kodilla.invoice.config.AdminConfig;
+import com.kodilla.invoice.domain.ClientDto;
 import com.kodilla.invoice.domain.CreatedCustomerDto;
 import com.kodilla.invoice.domain.CustomerDto;
 import com.kodilla.invoice.domain.Mail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import static java.util.Optional.ofNullable;
 
@@ -23,6 +26,15 @@ public class CustomerService {
     private static final String SUBJECT = "New customer";
     private static final String SUBJECT_DELETE = "Delete customer ";
     private static final String SUBJECT_UPDATE = "Update customer ";
+
+    public List<ClientDto> fetchClients() {
+        return invoiceClient.getCustomers();
+    }
+
+    public ClientDto fetchClientById(Long id) {
+        return invoiceClient.getCustomerById(id);
+    }
+
     public CreatedCustomerDto createCustomer(final CustomerDto customerDto) {
         CreatedCustomerDto newCustomer = invoiceClient.postCustomer(customerDto);
                 ofNullable(newCustomer).ifPresent(customer->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,

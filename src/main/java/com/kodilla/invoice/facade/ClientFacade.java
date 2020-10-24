@@ -22,7 +22,7 @@ public class ClientFacade {
         clientService.deleteById(id);
     }
     public Client updateClient(ClientDto clientDto) {
-        return clientService.save(clientMapper.mapToClient(clientDto));
+        return clientService.update(clientMapper.mapToClient(clientDto));
     }
     public Client createClient(CustomerDto clientDto) {
 

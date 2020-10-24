@@ -131,7 +131,7 @@ public class InvoiceClient {
     }
 
     //Customer
-    public List<ClientDto> getClients(){
+    public List<ClientDto> getCustomers(){
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/clients.json?" + invoiceConfig.getInvoiceToken())
                 .build().encode().toUri();
         try{
@@ -142,7 +142,7 @@ public class InvoiceClient {
             return  new ArrayList<>();
         }
     }
-    public ClientDto getClientById(Long id){
+    public ClientDto getCustomerById(Long id){
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/clients/" + id + ".json?" + invoiceConfig.getInvoiceToken())
                 .build().encode().toUri();
         try{

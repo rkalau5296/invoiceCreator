@@ -21,6 +21,8 @@ public class CustomerService {
     private AdminConfig adminConfig;
 
     private static final String SUBJECT = "New customer";
+    private static final String SUBJECT_DELETE = "Delete customer ";
+    private static final String SUBJECT_UPDATE = "Update customer ";
     public CreatedCustomerDto createCustomer(final CustomerDto customerDto) {
         CreatedCustomerDto newCustomer = invoiceClient.postCustomer(customerDto);
                 ofNullable(newCustomer).ifPresent(customer->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,
@@ -30,9 +32,14 @@ public class CustomerService {
     }
 
     public void updateCustomer(final CustomerDto customerDto, Long id) {
+        emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_UPDATE,
+                "The customer id = " + id + " has been updated, and sent to fakturownia.pl. New customer name is " + customerDto));
         invoiceClient.updateCustomer(customerDto, id);
     }
     public void deleteCustomer(Long id) {
+
+        emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_DELETE,
+                "The customer id = " + id + " has been deleted from fakturownia.pl."));
         invoiceClient.deleteCustomerById(id);
     }
 }

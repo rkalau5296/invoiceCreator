@@ -5,6 +5,9 @@ import com.kodilla.invoice.config.AdminConfig;
 import com.kodilla.invoice.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 import static java.util.Optional.ofNullable;
 @Service
 public class ProductObjectService {
@@ -18,6 +21,14 @@ public class ProductObjectService {
     private static final String SUBJECT = "New product";
     private static final String SUBJECT_DELETE = "Delete product ";
     private static final String SUBJECT_UPDATE = "Update product ";
+
+    public List<ProductDto> fetchProducts() {
+        return invoiceClient.getProducts();
+    }
+
+    public ProductDto fetchProductById(Long id) {
+        return invoiceClient.getProductById(id);
+    }
 
     public CreatedProductDto createProduct(final ProductObjectDto productObjectDto) {
         CreatedProductDto newProduct = invoiceClient.postProduct(productObjectDto);

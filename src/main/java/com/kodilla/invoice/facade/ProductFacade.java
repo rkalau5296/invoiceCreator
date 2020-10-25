@@ -2,9 +2,7 @@ package com.kodilla.invoice.facade;
 
 import com.kodilla.invoice.domain.*;
 import com.kodilla.invoice.mapper.ProductMapper;
-import com.kodilla.invoice.service.ProductDtoService;
 import com.kodilla.invoice.service.ProductService;
-import com.kodilla.invoice.validator.ProductValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.List;

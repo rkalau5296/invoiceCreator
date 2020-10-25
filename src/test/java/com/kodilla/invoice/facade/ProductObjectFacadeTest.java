@@ -2,8 +2,7 @@ package com.kodilla.invoice.facade;
 
 import com.kodilla.invoice.domain.*;
 import com.kodilla.invoice.mapper.ProductMapper;
-import com.kodilla.invoice.repository.ProductDtoRepository;
-import com.kodilla.invoice.service.ProductDtoService;
+import com.kodilla.invoice.repository.ProductObjectRepository;
 import com.kodilla.invoice.service.ProductObjectService;
 import com.kodilla.invoice.validator.ProductValidator;
 import org.junit.Test;
@@ -11,7 +10,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,15 +25,13 @@ public class ProductObjectFacadeTest {
     @InjectMocks
     private ProductObjectFacade productObjectFacade;
     @Mock
-    private ProductDtoService productDtoService;
-    @Mock
     private ProductObjectService productObjectService;
     @Mock
     private ProductMapper productMapper;
     @Mock
     private ProductValidator productValidator;
     @Mock
-    private ProductDtoRepository productDtoRepository;
+    private ProductObjectRepository productObjectRepository;
     @Test
     public void shouldFetchProducts() throws Exception {
 
@@ -45,12 +41,12 @@ public class ProductObjectFacadeTest {
         List<ProductDto> productDtoList = new ArrayList<>();
         productDtoList.add(new ProductDto(1L, "name", "code", 10.00, "tax"));
 
-        when(productDtoService.fetchProducts()).thenReturn(productDtoList);
+        when(productObjectService.fetchProducts()).thenReturn(productDtoList);
         when(productMapper.mapToListProductDto(productList)).thenReturn(productDtoList);
         when(productMapper.mapToListProducts(productDtoList)).thenReturn(productList);
         when(productValidator.validateProducts(productList)).thenReturn(productList);
         for(ProductDto productDto : productDtoList) {
-            when(productDtoRepository.save(productDto)).thenReturn(productDto);
+            when(productObjectRepository.save(productDto)).thenReturn(productDto);
         }
         //When
         List<ProductDto> productsDto = productObjectFacade.fetchProducts();
@@ -68,7 +64,7 @@ public class ProductObjectFacadeTest {
         //Given
         ProductDto productDto = new ProductDto(1L, "name", "code", 10.00, "tax");
 
-        when(productDtoService.fetchProductById(1L)).thenReturn(productDto);
+        when(productObjectService.fetchProductById(1L)).thenReturn(productDto);
 
         //When
         ProductDto anotherProductDto = productObjectFacade.fetchProductById(1L);

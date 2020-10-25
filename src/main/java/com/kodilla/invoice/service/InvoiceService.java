@@ -22,22 +22,29 @@ public class InvoiceService {
     private AdminConfig adminConfig;
 
     private static final String SUBJECT = "New invoice";
-
+    private static final String SUBJECT_DELETE = "Delete Invoice ";
+    private static final String SUBJECT_UPDATE = "Update Invoice ";
     public List<Invoice> getAllInvoicesFromDb() {
         return repository.findAll();
     }
-
     public Invoice getInvoiceByIdFromDb(Long id){
         return repository.findById(id).orElse(null);
     }
-
     public Invoice saveInvoice(final Invoice invoice) {
         ofNullable(invoice).ifPresent(customer->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,
                 "New invoice to customer id: "+ invoice.getClient_id()+ " has been created, and added to database only. Don't forget sending it to external services, in case using it by another users.")));
+        assert invoice != null;
         return repository.save(invoice);
     }
-
+    public Invoice updateInvoice(final Invoice invoice) {
+        ofNullable(invoice).ifPresent(customer->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_UPDATE,
+                "New invoice to customer id: "+ invoice.getClient_id()+ " has been updated, and added to database only.")));
+        assert invoice != null;
+        return repository.save(invoice);
+    }
     public void deleteById(Long id) {
         repository.deleteById(id);
+        emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_DELETE,
+                "The invoice id = " + id + " has been deleted from database only. Don't forget delete it from external services."));
     }
 }

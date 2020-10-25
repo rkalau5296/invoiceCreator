@@ -30,11 +30,9 @@ public class CustomerService {
     public List<ClientDto> fetchClients() {
         return invoiceClient.getCustomers();
     }
-
     public ClientDto fetchClientById(Long id) {
         return invoiceClient.getCustomerById(id);
     }
-
     public CreatedCustomerDto createCustomer(final CustomerDto customerDto) {
         CreatedCustomerDto newCustomer = invoiceClient.postCustomer(customerDto);
                 ofNullable(newCustomer).ifPresent(customer->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,
@@ -42,7 +40,6 @@ public class CustomerService {
 
         return newCustomer;
     }
-
     public void updateCustomer(final CustomerDto customerDto, Long id) {
         invoiceClient.updateCustomer(customerDto, id);
         emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_UPDATE,

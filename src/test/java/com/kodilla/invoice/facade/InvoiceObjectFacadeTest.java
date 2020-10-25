@@ -4,9 +4,7 @@ import com.kodilla.invoice.domain.CreatedInvoiceDto;
 import com.kodilla.invoice.domain.Invoice;
 import com.kodilla.invoice.domain.InvoiceObjectDto;
 import com.kodilla.invoice.domain.InvoicePosition;
-import com.kodilla.invoice.repository.CreatedInvoiceDtoRepository;
-import com.kodilla.invoice.repository.InvoiceDtoRepository;
-import com.kodilla.invoice.service.InvoiceDtoService;
+import com.kodilla.invoice.repository.InvoiceObjectRepository;
 import com.kodilla.invoice.service.InvoiceObjectService;
 import com.kodilla.invoice.validator.InvoiceValidator;
 import org.junit.Test;
@@ -27,23 +25,21 @@ public class InvoiceObjectFacadeTest {
     @InjectMocks
     private InvoiceObjectFacade invoiceObjectFacade;
     @Mock
-    private InvoiceDtoService invoiceDtoService;
-    @Mock
     private InvoiceObjectService invoiceObjectService;
     @Mock
     private InvoiceValidator invoiceValidator;
     @Mock
-    private CreatedInvoiceDtoRepository createdInvoiceDtoRepository;
+    private InvoiceObjectRepository invoiceObjectRepository;
     @Test
     public void shouldFetchInvoices() throws Exception {
         //Given
         List<CreatedInvoiceDto> createdInvoiceDtos = new ArrayList<>();
         createdInvoiceDtos.add(new CreatedInvoiceDto(1L, "price_net", "price_gross", "buyer_name", "product_cache"));
 
-        when(invoiceDtoService.fetchInvoices()).thenReturn(createdInvoiceDtos);
+        when(invoiceObjectService.fetchInvoices()).thenReturn(createdInvoiceDtos);
         when(invoiceValidator.validateInvoices(createdInvoiceDtos)).thenReturn(createdInvoiceDtos);
         for(CreatedInvoiceDto createdInvoiceDto : createdInvoiceDtos) {
-            when(createdInvoiceDtoRepository.save(createdInvoiceDto)).thenReturn(createdInvoiceDto);
+            when(invoiceObjectRepository.save(createdInvoiceDto)).thenReturn(createdInvoiceDto);
         }
         //When
         List<CreatedInvoiceDto> createdInvoiceDtoList = invoiceObjectFacade.fetchInvoices();
@@ -61,7 +57,7 @@ public class InvoiceObjectFacadeTest {
         //Given
         CreatedInvoiceDto createdInvoiceDto = new CreatedInvoiceDto(1L, "price_net", "price_gross", "buyer_name", "product_cache");
 
-        when(invoiceDtoService.fetchInvoiceById(1L)).thenReturn(createdInvoiceDto);
+        when(invoiceObjectService.fetchInvoiceById(1L)).thenReturn(createdInvoiceDto);
 
         //When
         CreatedInvoiceDto invoiceDto = invoiceObjectFacade.fetchInvoiceById(1L);

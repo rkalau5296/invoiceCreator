@@ -1,11 +1,9 @@
 package com.kodilla.invoice.facade;
 
 import com.kodilla.invoice.domain.*;
-import com.kodilla.invoice.mapper.ClientMapper;
 import com.kodilla.invoice.mapper.ProductMapper;
-import com.kodilla.invoice.repository.ProductDtoRepository;
+import com.kodilla.invoice.repository.ProductObjectRepository;
 import com.kodilla.invoice.service.*;
-import com.kodilla.invoice.validator.ClientValidator;
 import com.kodilla.invoice.validator.ProductValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,20 +14,18 @@ import java.util.List;
 public class ProductObjectFacade {
 
     @Autowired
-    private ProductDtoService productDtoService;
-    @Autowired
     private ProductObjectService productObjectService;
     @Autowired
     private ProductMapper productMapper;
     @Autowired
     private ProductValidator productValidator;
     @Autowired
-    private ProductDtoRepository productDtoRepository;
+    private ProductObjectRepository productObjectRepository;
 
     public List<ProductDto> fetchProducts() {
-        List<ProductDto> fetchedProducts = productDtoService.fetchProducts();
+        List<ProductDto> fetchedProducts = productObjectService.fetchProducts();
         for(ProductDto productDto :fetchedProducts) {
-            productDtoRepository.save(productDto);
+            productObjectRepository.save(productDto);
         }
 
         return productMapper.mapToListProductDto(productValidator.validateProducts(productMapper.mapToListProducts(fetchedProducts)));
@@ -37,7 +33,7 @@ public class ProductObjectFacade {
 
     public ProductDto fetchProductById(Long id) {
         productValidator.validateProductById(id);
-        return productDtoService.fetchProductById(id);
+        return productObjectService.fetchProductById(id);
     }
 
     public CreatedProductDto createProduct(final ProductObjectDto productObjectDto) {

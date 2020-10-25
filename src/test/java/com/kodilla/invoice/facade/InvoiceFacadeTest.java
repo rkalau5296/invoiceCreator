@@ -104,7 +104,7 @@ public class InvoiceFacadeTest {
         InvoiceDto invoiceDto = new InvoiceDto(1L, 1,1, positionsDto );
 
         when(invoiceMapper.mapToInvoice(invoiceDto)).thenReturn(invoice);
-        when(invoiceService.saveInvoice(invoice)).thenReturn(invoice);
+        when(invoiceService.updateInvoice(invoice)).thenReturn(invoice);
 
         //when
         Invoice anotherInvoice = invoiceFacade.updateInvoice(invoiceDto);

@@ -1,15 +1,12 @@
 package com.kodilla.invoice.validator;
 
-import com.kodilla.invoice.domain.BuyerDto;
 import com.kodilla.invoice.domain.Client;
-import com.kodilla.invoice.domain.CreatedInvoiceDto;
+import com.kodilla.invoice.domain.ClientDto;
 import com.kodilla.invoice.domain.CustomerDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class ClientValidator {
@@ -37,5 +34,9 @@ public class ClientValidator {
     public void validateUpdateCustomer(final CustomerDto customerDto, Long id) {
         LOGGER.info("Starting updating customer id = " + id + " " + customerDto);
         LOGGER.info("Customer id = " + id + " has been updated.");
+    }
+    public void validateUpdateClient(final ClientDto clientDto) {
+        LOGGER.info("Starting updating " + clientDto);
+        LOGGER.info("Customer id = " + clientDto.getId() + " has been updated.");
     }
 }

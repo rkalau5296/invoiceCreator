@@ -5,11 +5,13 @@ import com.kodilla.invoice.domain.ClientDto;
 import com.kodilla.invoice.domain.CustomerDto;
 import com.kodilla.invoice.mapper.ClientMapper;
 import com.kodilla.invoice.service.ClientService;
+import com.kodilla.invoice.validator.ClientValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,8 @@ public class ClientFacadeTest {
     private ClientService clientService;
     @Mock
     private ClientMapper clientMapper;
+    @Mock
+    private ClientValidator clientValidator;
 
     @Test
     public void shouldGetAllClientsFromDb() {
@@ -33,7 +37,8 @@ public class ClientFacadeTest {
         List<Client> clients = new ArrayList<>();
         clients.add(new Client(1L, "name", "tax_no", "bank", "bank_account", "city", "country", "email", "person", "post_code", "phone", "street", "street_no"));
 
-        when(clientFacade.getAllClientsFromDb()).thenReturn(clients);
+        when(clientService.getAllClientsFromDb()).thenReturn(clients);
+        when(clientValidator.validateClients(clients)).thenReturn(clients);
 
         //When
         List<Client> clientList =  clientFacade.getAllClientsFromDb();
@@ -85,6 +90,7 @@ public class ClientFacadeTest {
         CustomerDto customerDto = new CustomerDto(1L, "api_token", client);
         when(clientMapper.mapToClientFromCustomerDto(customerDto)).thenReturn(client);
         when(clientService.save(client)).thenReturn(client);
+
         //When
         Client anotherClient = clientFacade.createClient(customerDto);
         //Then

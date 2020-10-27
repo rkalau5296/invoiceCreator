@@ -5,6 +5,8 @@ import com.kodilla.invoice.domain.ProductDto;
 import com.kodilla.invoice.domain.ProductObjectDto;
 import com.kodilla.invoice.mapper.ProductMapper;
 import com.kodilla.invoice.service.ProductService;
+import com.kodilla.invoice.validator.InvoiceValidator;
+import com.kodilla.invoice.validator.ProductValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -29,6 +31,8 @@ public class ProductFacadeTest {
     private ProductService productService;
     @Mock
     private ProductMapper productMapper;
+    @Mock
+    private ProductValidator productValidator;
 
     @Test
     public void shouldGetAllProductsFromDb() throws Exception {
@@ -91,7 +95,7 @@ public class ProductFacadeTest {
         ProductDto productDto = new ProductDto(1L, "name", "code", 10.00, "tax");
 
         when(productMapper.mapToProduct(productDto)).thenReturn(product);
-        when(productService.save(product)).thenReturn(product);
+        when(productService.update(product)).thenReturn(product);
 
         //When
         Product anotherProduct = productFacade.updateProduct(productDto);

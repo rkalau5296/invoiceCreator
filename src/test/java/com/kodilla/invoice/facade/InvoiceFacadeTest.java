@@ -6,6 +6,7 @@ import com.kodilla.invoice.domain.InvoiceObjectDto;
 import com.kodilla.invoice.domain.InvoicePosition;
 import com.kodilla.invoice.mapper.InvoiceMapper;
 import com.kodilla.invoice.service.InvoiceService;
+import com.kodilla.invoice.validator.InvoiceValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -27,6 +28,8 @@ public class InvoiceFacadeTest {
     private InvoiceService invoiceService;
     @Mock
     private InvoiceMapper invoiceMapper;
+    @Mock
+    private InvoiceValidator invoiceValidator;
 
     @Test
     public void shouldGetAllInvoicesFromDb() {
@@ -38,6 +41,7 @@ public class InvoiceFacadeTest {
         invoices.add(new Invoice(1L, 1,1, positions ));
 
         when(invoiceService.getAllInvoicesFromDb()).thenReturn(invoices);
+
         //when
         List<Invoice> invoiceList = invoiceFacade.getAllInvoicesFromDb();
         //Then

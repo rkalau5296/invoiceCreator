@@ -16,11 +16,9 @@ public class RateDtoService {
     public List<RateTableDto> fetchRates(String table) {
         return invoiceClient.getRates(table);
     }
-
     public List<RateTableDto> fetchRatesInDateRangeFromTo(String table, String startDate, String endDate) {
         return invoiceClient.getRatesInDateRangeFromTo(table, startDate, endDate);
     }
-
     public RateCurrencyDto fetchRateAParticularcurrency(String table, String code) {
         return invoiceClient.getRateAPArticularCurrency(table, code);
     }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
 
@@ -21,7 +22,7 @@ public class ClientService {
     @Autowired
     private AdminConfig adminConfig;
 
-    private static final String SUBJECT = "New client";
+    private static final String SUBJECT = "New client to db";
     private static final String SUBJECT_DELETE = "Delete client from Db";
     private static final String SUBJECT_UPDATE = "Update client in Db";
 
@@ -38,10 +39,10 @@ public class ClientService {
         return repository.save(client);
     }
     public Client update(final Client client) {
-        ofNullable(client).ifPresent(customer->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_UPDATE,
-                "The client: "+ customer.getName() + " has been updated in database only.")));
-        assert client != null;
-        return repository.save(client);
+        Client updateClient = repository.save(client);
+        Optional.of(client).ifPresent(customer->emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_UPDATE,
+                "The client: "+ customer.getId() + " has been updated in database only. New client name: " + customer.getName())));
+        return updateClient;
     }
     public void deleteById(Long id) {
         repository.deleteById(id);

@@ -35,4 +35,8 @@ public class ProductValidator {
         LOGGER.info("Starting updating product id = " + id + " " + updateProductDto);
         LOGGER.info("Product id = " + id + " has been updated.");
     }
+    public void validateUpdating(final ProductDto productDto) {
+        LOGGER.info("Starting updating product id = " + productDto.getId() + " " + productDto);
+        LOGGER.info("Product id = " + productDto.getId() + " has been updated.");
+    }
 }

@@ -5,9 +5,11 @@ import com.kodilla.invoice.config.RateConfig;
 import com.kodilla.invoice.domain.*;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.slf4j.Logger;
 import java.net.URI;
@@ -48,7 +50,6 @@ public class InvoiceClient {
     }
     public CreatedInvoiceDto postInvoice(final InvoiceObjectDto invoiceObjectDto){
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/invoices.json")
-
                 .build().encode().toUri();
         try{
             return restTemplate.postForObject(uri, invoiceObjectDto, CreatedInvoiceDto.class);
@@ -59,7 +60,6 @@ public class InvoiceClient {
     }
     public void updateInvoice(final BuyerDto buyerDto, Long id) {
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/invoices/" + id + ".json")
-
                 .build().encode().toUri();
         try{
             restTemplate.put(uri, buyerDto);
@@ -67,15 +67,15 @@ public class InvoiceClient {
             LOGGER.error(e.getMessage(), e);
         }
     }
-    public void deleteById(final Long id) {
+    public void deleteInvoice(final Long id) {
         URI uri = UriComponentsBuilder.fromHttpUrl(invoiceConfig.getInvoiceApiEndpoint() + ".fakturownia.pl/invoices/" + id + "json?api_token=" + invoiceConfig.getToken())
-
                 .build().encode().toUri();
         try{
             restTemplate.delete(uri);
 
         }catch(RestClientException e){
             LOGGER.error(e.getMessage(), e);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "invoice not found" );
         }
     }
 
@@ -127,6 +127,7 @@ public class InvoiceClient {
             restTemplate.delete(uri);
         }catch(RestClientException e){
             LOGGER.error(e.getMessage(), e);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "product not found" );
         }
     }
 
@@ -178,6 +179,7 @@ public class InvoiceClient {
             restTemplate.delete(uri);
         }catch(RestClientException e){
             LOGGER.error(e.getMessage(), e);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "product not found" );
         }
     }
 
@@ -214,24 +216,5 @@ public class InvoiceClient {
             return new RateCurrencyDto();
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

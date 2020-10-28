@@ -3,7 +3,10 @@ package com.kodilla.invoice.controller;
 import com.kodilla.invoice.domain.*;
 import com.kodilla.invoice.facade.ProductFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -32,7 +35,8 @@ public class ProductController {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/products/{productId}")
     public void deleteProduct (@PathVariable Long productId){
-        productFacade.deletedById(productId);
+            productFacade.deletedById(productId);
+
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/products")

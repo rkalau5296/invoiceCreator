@@ -36,9 +36,9 @@ public class InvoiceObjectFacade {
         invoiceValidator.validateCreatingInvoice(fetchedInvoice);
         return fetchedInvoice;
     }
-    public void deletedById(Long id) {
+    public void deleteInvoice(Long id) {
         invoiceValidator.validateDeletingInvoice(id);
-        invoiceObjectService.deleteById(id);
+        invoiceObjectService.deleteInvoice(id);
     }
     public void updateInvoice(final BuyerDto buyerDto, Long id) {
         invoiceValidator.validateUpdateInvoice(buyerDto, id);

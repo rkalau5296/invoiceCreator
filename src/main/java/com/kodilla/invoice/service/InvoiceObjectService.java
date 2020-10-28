@@ -42,8 +42,8 @@ public class InvoiceObjectService {
                 "The invoice id = " + id + " has been updated, and sent to fakturownia.pl. New buyer name is " + buyerDto.getInvoice().getBuyer_name()));
 
     }
-    public void deleteById(Long id) {
-        invoiceClient.deleteById(id);
+    public void deleteInvoice(Long id) {
+        invoiceClient.deleteInvoice(id);
         emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_DELETE,
                 "The invoice id = " + id + " has been deleted from fakturownia.pl."));
     }

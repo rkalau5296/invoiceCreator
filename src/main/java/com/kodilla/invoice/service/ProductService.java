@@ -4,7 +4,10 @@ import com.kodilla.invoice.config.AdminConfig;
 import com.kodilla.invoice.domain.*;
 import com.kodilla.invoice.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -43,8 +46,11 @@ public class ProductService {
         return updateProduct;
     }
     public void deleteById(Long id) {
-        productRepository.deleteById(id);
-        emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_DELETE,
-                "The product id = " + id + " has been deleted from database only. Don't forget delete it from external services."));
+
+            productRepository.deleteById(id);
+            emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT_DELETE,
+                    "The product id = " + id + " has been deleted from database only. Don't forget delete it from external services."));
+
+
     }
 }

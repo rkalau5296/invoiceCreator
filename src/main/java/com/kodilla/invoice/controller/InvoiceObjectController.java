@@ -33,7 +33,7 @@ public class InvoiceObjectController {
     }
     @RequestMapping(method = RequestMethod.DELETE, value = "/invoices/{invoiceId}")
     public void deleteInvoice (@PathVariable Long invoiceId){
-        invoiceObjectFacade.deletedById(invoiceId);
+        invoiceObjectFacade.deleteInvoice(invoiceId);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/invoices/{invoiceId}")

@@ -13,13 +13,15 @@ repositories {
 }
 
 ext {
-    set('vaadinVersion', "14.1.17")
+    set('vaadinVersion', "19.0.2")
 }
 
 dependencies {
     implementation project(":dto")
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'com.vaadin:vaadin-spring-boot-starter'
+    // https://mvnrepository.com/artifact/com.vaadin/vaadin-spring-boot-starter
+    implementation group: 'com.vaadin', name: 'vaadin-spring-boot-starter', version: '19.0.2'
+
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
